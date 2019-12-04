@@ -3,11 +3,16 @@ package com.zenvia.roman.numeral;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public final class CompoundNumeral {
+
+    private static final CompoundNumeral EMPTY = new CompoundNumeral(emptyList());
 
     private final List<RomanNumeral> numerals;
 
@@ -25,7 +30,7 @@ public final class CompoundNumeral {
         return new CompoundNumeral(numerals);
     }
 
-    static CompoundNumeral concat(RomanNumeral numeral,CompoundNumeral compoundNumeral) {
+    static CompoundNumeral concat(RomanNumeral numeral, CompoundNumeral compoundNumeral) {
         List<RomanNumeral> concatenated = new ArrayList<>();
         concatenated.add(numeral);
         concatenated.addAll(compoundNumeral.numerals);
@@ -35,6 +40,18 @@ public final class CompoundNumeral {
 
     static CompoundNumeral of(RomanNumeral... numerals) {
         return new CompoundNumeral(new ArrayList<>(asList(numerals)));
+    }
+
+    public static CompoundNumeral empty() {
+        return EMPTY;
+    }
+
+    public CompoundNumeral concat(CompoundNumeral other) {
+        List<RomanNumeral> newNumerals = Stream
+                .concat(numerals.stream(), other.numerals.stream())
+                .collect(toList());
+
+        return new CompoundNumeral(newNumerals);
     }
 
     @Override
@@ -53,4 +70,5 @@ public final class CompoundNumeral {
     public String toString() {
         return numerals.stream().map(RomanNumeral::name).collect(joining());
     }
+
 }

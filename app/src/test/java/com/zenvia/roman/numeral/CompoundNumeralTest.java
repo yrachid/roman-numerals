@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static com.zenvia.roman.numeral.RomanNumeral.I;
 import static com.zenvia.roman.numeral.RomanNumeral.V;
+import static com.zenvia.roman.numeral.RomanNumeral.X;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -21,5 +22,20 @@ public class CompoundNumeralTest {
         CompoundNumeral numeral = CompoundNumeral.concat(I, CompoundNumeral.of(V));
 
         assertThat(numeral.toString(), equalTo("IV"));
+    }
+
+    @Test
+    public void concatenates_another_compound_numeral() {
+        CompoundNumeral four = CompoundNumeral.of(I, V);
+        CompoundNumeral twenty = CompoundNumeral.of(X, X);
+
+        CompoundNumeral twentyFour = twenty.concat(four);
+
+        assertThat(twentyFour.toString(), equalTo("XXIV"));
+    }
+
+    @Test
+    public void empty_compound_yields_no_value() {
+        assertThat(CompoundNumeral.empty().toString(), equalTo(""));
     }
 }
