@@ -25,6 +25,7 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void converts_units() {
+        assertThat(convert(1), equalTo("I"));
         assertThat(convert(2), equalTo("II"));
         assertThat(convert(3), equalTo("III"));
         assertThat(convert(4), equalTo("IV"));
@@ -33,5 +34,21 @@ public class RomanNumeralConverterTest {
         assertThat(convert(7), equalTo("VII"));
         assertThat(convert(8), equalTo("VIII"));
         assertThat(convert(9), equalTo("IX"));
+        assertThat(convert(10), equalTo("X"));
+    }
+
+    @Test
+    public void converts_from_ten_to_twenty() {
+        assertThat(convert(10), equalTo("X"));
+        assertThat(convert(11), equalTo("XI"));
+        assertThat(convert(12), equalTo("XII"));
+        assertThat(convert(13), equalTo("XIII"));
+        assertThat(convert(14), equalTo("XIV"));
+        assertThat(convert(15), equalTo("XV"));
+        assertThat(convert(16), equalTo("XVI"));
+        assertThat(convert(17), equalTo("XVII"));
+        assertThat(convert(18), equalTo("XVIII"));
+        assertThat(convert(19), equalTo("XIX"));
+        assertThat(convert(20), equalTo("XX"));
     }
 }

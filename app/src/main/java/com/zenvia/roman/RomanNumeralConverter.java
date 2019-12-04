@@ -1,6 +1,8 @@
 package com.zenvia.roman;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class RomanNumeralConverter {
@@ -26,6 +28,12 @@ public class RomanNumeralConverter {
                     .findFirst();
         }
 
+        public String repeated(int times) {
+            return IntStream.rangeClosed(1, times)
+                    .mapToObj(i -> name())
+                    .collect(Collectors.joining());
+        }
+
         public static boolean hasDirectEquivalent(int arabicValue) {
             return Stream.of(values())
                     .anyMatch(roman -> roman.arabicValue == arabicValue);
@@ -44,38 +52,42 @@ public class RomanNumeralConverter {
                     .orElse(Integer.toString(arabicValue));
         }
 
-        if (arabicValue < 10) {
+        if (arabicValue <= 10) {
             return convertUnit(arabicValue);
+        }
+
+        if (arabicValue <= 20) {
+            return convertTens(arabicValue);
         }
 
         return Integer.toString(arabicValue);
     }
 
+    private static String convertTens(int arabicValue) {
+        return "X" + convertUnit(arabicValue - 10);
+    }
+
     private static String convertUnit(int value) {
-        if (value == 2) {
-            return "II";
+        if (value < 4) {
+            return RomanNumeral.I.repeated(value);
         }
 
-        if (value == 3) {
-            return "III";
+        if (value > 5 && value < 9) {
+            return "V" + RomanNumeral.I.repeated(value - 5);
         }
 
         if (value == 4) {
             return "IV";
         }
 
-        if (value == 6) {
-            return "VI";
+        if (value == 9) {
+            return "IX";
         }
 
-        if (value == 7) {
-            return "VII";
+        if (value == 5) {
+            return "V";
         }
 
-        if (value == 8) {
-            return "VIII";
-        }
-
-        return "IX";
+        return "X";
     }
 }
