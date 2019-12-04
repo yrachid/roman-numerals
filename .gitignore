@@ -1,0 +1,16 @@
+
+# Vim
+*.swp
+
+# Gradle
+
+.gradle/
+/**/build/
+/**/out/
+
+# IntelliJ
+/.idea/$PRODUCT_WORKSPACE_FILE$
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/workspace.xml
+/.idea/vcs.xml
