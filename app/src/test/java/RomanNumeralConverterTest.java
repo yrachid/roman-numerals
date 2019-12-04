@@ -1,3 +1,4 @@
+import com.zenvia.roman.RomanNumeralConverter;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
