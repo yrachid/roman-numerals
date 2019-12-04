@@ -51,4 +51,11 @@ public class RomanNumeralConverterTest {
         assertThat(convert(19), equalTo("XIX"));
         assertThat(convert(20), equalTo("XX"));
     }
+
+    @Test
+    public void converts_numbers_with_both_tens_and_units() {
+        assertThat(convert(21), equalTo("XXI"));
+        assertThat(convert(24), equalTo("XXIV"));
+        assertThat(convert(29), equalTo("XXIX"));
+    }
 }
