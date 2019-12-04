@@ -8,13 +8,15 @@ import static com.zenvia.roman.numeral.RomanNumeral.X;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class CompoundNumeralTest {
+public class CompoundRomanNumeralTest {
 
     @Test
     public void creates_compound_numeral_from_repetition() {
-        CompoundNumeral numeral = CompoundNumeral.repeating(I, 3);
+        CompoundNumeral three = CompoundNumeral.repeating(I, 3);
+        CompoundNumeral none = CompoundNumeral.repeating(I, 0);
 
-        assertThat(numeral.toString(), equalTo("III"));
+        assertThat(three.toString(), equalTo("III"));
+        assertThat(none, equalTo(CompoundNumeral.empty()));
     }
 
     @Test
