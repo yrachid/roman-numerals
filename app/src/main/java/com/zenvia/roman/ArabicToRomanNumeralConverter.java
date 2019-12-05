@@ -9,7 +9,7 @@ import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.UNIT;
 import static com.zenvia.roman.PivotBasedPositionalConverter.pivoting;
 import static com.zenvia.roman.numeral.RomanNumeral.M;
 
-public class RomanNumeralConverter {
+public class ArabicToRomanNumeralConverter {
 
     public static String convert(int arabicValue) {
 
