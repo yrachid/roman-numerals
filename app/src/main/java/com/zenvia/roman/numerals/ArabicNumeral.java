@@ -1,4 +1,4 @@
-package com.zenvia.roman.numeral;
+package com.zenvia.roman.numerals;
 
 import java.util.stream.IntStream;
 

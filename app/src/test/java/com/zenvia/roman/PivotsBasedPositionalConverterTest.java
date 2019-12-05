@@ -1,6 +1,6 @@
 package com.zenvia.roman;
 
-import com.zenvia.roman.numeral.CompoundNumeral;
+import com.zenvia.roman.numerals.CompoundNumeral;
 import org.junit.Test;
 
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.HUNDRED;

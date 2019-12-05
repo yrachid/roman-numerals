@@ -1,4 +1,4 @@
-package com.zenvia.roman.numeral;
+package com.zenvia.roman.numerals;
 
 public enum RomanNumeral {
     I(1),

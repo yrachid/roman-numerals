@@ -1,10 +1,10 @@
-package com.zenvia.roman.numeral;
+package com.zenvia.roman.numerals;
 
 import org.junit.Test;
 
-import static com.zenvia.roman.numeral.RomanNumeral.I;
-import static com.zenvia.roman.numeral.RomanNumeral.V;
-import static com.zenvia.roman.numeral.RomanNumeral.X;
+import static com.zenvia.roman.numerals.RomanNumeral.I;
+import static com.zenvia.roman.numerals.RomanNumeral.V;
+import static com.zenvia.roman.numerals.RomanNumeral.X;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 

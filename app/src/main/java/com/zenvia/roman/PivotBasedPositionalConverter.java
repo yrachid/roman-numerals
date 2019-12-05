@@ -1,18 +1,18 @@
 package com.zenvia.roman;
 
-import com.zenvia.roman.numeral.CompoundNumeral;
-import com.zenvia.roman.numeral.RomanNumeral;
+import com.zenvia.roman.numerals.CompoundNumeral;
+import com.zenvia.roman.numerals.RomanNumeral;
 
 import java.util.function.Function;
 
-import static com.zenvia.roman.numeral.RomanNumeral.C;
-import static com.zenvia.roman.numeral.RomanNumeral.D;
-import static com.zenvia.roman.numeral.RomanNumeral.I;
-import static com.zenvia.roman.numeral.RomanNumeral.L;
-import static com.zenvia.roman.numeral.RomanNumeral.M;
-import static com.zenvia.roman.numeral.RomanNumeral.V;
-import static com.zenvia.roman.numeral.RomanNumeral.X;
-import static com.zenvia.roman.numeral.RomanNumeral.compose;
+import static com.zenvia.roman.numerals.RomanNumeral.C;
+import static com.zenvia.roman.numerals.RomanNumeral.D;
+import static com.zenvia.roman.numerals.RomanNumeral.I;
+import static com.zenvia.roman.numerals.RomanNumeral.L;
+import static com.zenvia.roman.numerals.RomanNumeral.M;
+import static com.zenvia.roman.numerals.RomanNumeral.V;
+import static com.zenvia.roman.numerals.RomanNumeral.X;
+import static com.zenvia.roman.numerals.RomanNumeral.compose;
 
 public class PivotBasedPositionalConverter {
 

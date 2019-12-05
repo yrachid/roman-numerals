@@ -1,4 +1,4 @@
-package com.zenvia.roman.numeral;
+package com.zenvia.roman.numerals;
 
 import org.junit.Rule;
 import org.junit.Test;
