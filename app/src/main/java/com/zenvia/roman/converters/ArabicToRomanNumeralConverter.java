@@ -1,12 +1,12 @@
-package com.zenvia.roman;
+package com.zenvia.roman.converters;
 
 import com.zenvia.roman.numerals.ArabicNumber;
 import com.zenvia.roman.numerals.RomanNumber;
 
-import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.HUNDRED;
-import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.TENS;
-import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.UNIT;
-import static com.zenvia.roman.PivotBasedPositionalConverter.pivoting;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.Pivots.HUNDRED;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.Pivots.TENS;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.Pivots.UNIT;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.pivoting;
 import static com.zenvia.roman.numerals.RomanNumeral.M;
 
 public class ArabicToRomanNumeralConverter {

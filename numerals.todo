@@ -1,8 +1,9 @@
 
-- [ ] Eliminar conversao de equivalentes diretos
-- [ ] Alterar versao do java para 11
-- [ ] Executar o programa manualmente
+- [ ] O processamento de entrada deve ser mais elaborado
+  - [ ] Criar classes para lidar com isso ao inves de fazer no metodo main
+- [ ] Teste funcional deve receber parametros
 - [ ] Criar package para conversores
+- [ ] Criar git tag para identificar quando uma parte do desafio estiver finalizada
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral
@@ -11,3 +12,4 @@
   - [X] pkg numeral -> numerals
   - [X] ArabicNumeral -> ArabicNumber
   - [X] CompoundNumeral -> RomanNumber
+- [X] Eliminar conversao de equivalentes diretos

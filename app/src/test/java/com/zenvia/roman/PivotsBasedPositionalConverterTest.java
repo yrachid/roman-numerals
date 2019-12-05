@@ -1,12 +1,13 @@
 package com.zenvia.roman;
 
+import com.zenvia.roman.converters.PivotBasedPositionalConverter;
 import com.zenvia.roman.numerals.RomanNumber;
 import org.junit.Test;
 
-import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.HUNDRED;
-import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.TENS;
-import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.UNIT;
-import static com.zenvia.roman.PivotBasedPositionalConverter.pivoting;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.Pivots.HUNDRED;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.Pivots.TENS;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.Pivots.UNIT;
+import static com.zenvia.roman.converters.PivotBasedPositionalConverter.pivoting;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
