@@ -2,6 +2,6 @@
 - [ ] Eliminar conversao de equivalentes diretos
 - [ ] Alterar versao do java para 11
 - [ ] Executar o programa manualmente
-- [ ] Testes manuais com Docker
-- [ ] Renomear: CompoundRomanNumeral
 - [X] Criar classe ArabicValue?
+- [X] Testes manuais com Docker
+- [X] Renomear: CompoundRomanNumeral

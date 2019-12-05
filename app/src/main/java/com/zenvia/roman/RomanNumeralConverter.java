@@ -25,8 +25,13 @@ public class RomanNumeralConverter {
                         .orElse(Integer.toString(arabicValue));
             }
 
-            CompoundNumeral tens = convertTens(arabicNumeral.tens() * 10);
-            CompoundNumeral unit = convertUnit(arabicNumeral.unit());
+            CompoundNumeral tens = arabicNumeral.tens() == 0
+                    ? CompoundNumeral.empty()
+                    : convertTens(arabicNumeral.tens() * 10);
+
+            CompoundNumeral unit = arabicNumeral.unit() == 0
+                    ? CompoundNumeral.empty()
+                    : convertUnit(arabicNumeral.unit());
 
             return tens.concat(unit).toString();
 
@@ -60,10 +65,6 @@ public class RomanNumeralConverter {
     }
 
     private static CompoundNumeral convertUnit(int unit) {
-        if (unit == 0) {
-            return CompoundNumeral.empty();
-        }
-
         if (unit < 4) {
             return I.repeat(unit);
         }
