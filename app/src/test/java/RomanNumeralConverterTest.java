@@ -58,4 +58,17 @@ public class RomanNumeralConverterTest {
         assertThat(convert(24), equalTo("XXIV"));
         assertThat(convert(29), equalTo("XXIX"));
     }
+
+    @Test
+    public void converts_compound_numbers_regardless_of_position() {
+        assertThat(convert(900), equalTo("CM"));
+        assertThat(convert(1814), equalTo("MDCCCXIV"));
+        assertThat(convert(2011), equalTo("MMXI"));
+        assertThat(convert(2301), equalTo("MMCCCI"));
+        assertThat(convert(2901), equalTo("MMCMI"));
+        assertThat(convert(2444), equalTo("MMCDXLIV"));
+        assertThat(convert(2950), equalTo("MMCML"));
+        assertThat(convert(2999), equalTo("MMCMXCIX"));
+        assertThat(convert(3000), equalTo("MMM"));
+    }
 }

@@ -38,15 +38,3 @@
         ------- MM X I
 ```
 
-Casos de teste diversos:
-
-```java
- assertThat(convert(900), equalTo("CM"));
- assertThat(convert(2011), equalTo("MMCMI"));
- assertThat(convert(2301), equalTo("MMCCCI"));
- assertThat(convert(2901), equalTo("MMCMI"));
- assertThat(convert(2950), equalTo("MMCML"));
- assertThat(convert(2999), equalTo("MMCMXCIX"));
- assertThat(convert(3000), equalTo("MMM"));
-```
-

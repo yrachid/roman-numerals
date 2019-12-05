@@ -2,6 +2,12 @@
 - [ ] Eliminar conversao de equivalentes diretos
 - [ ] Alterar versao do java para 11
 - [ ] Executar o programa manualmente
+- [ ] Renomear:
+  - [ ] CompoundNumeral -> RomanNumber
+  - [ ] ArabicNumeral -> ArabicNumber
+  - [ ] RomanNumeralConverter -> ArabicToRomanConverter
+  - [ ] pkg numeral -> numerals
+- [ ] Criar package para conversores
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral
