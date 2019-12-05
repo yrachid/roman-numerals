@@ -9,6 +9,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.rangeClosed;
 
 public final class RomanNumber {
 
@@ -21,21 +22,16 @@ public final class RomanNumber {
     }
 
     static RomanNumber repeating(RomanNumeral numeral, int times) {
-        List<RomanNumeral> numerals = new ArrayList<>();
-
-        for (int i = 0; i < times; i++) {
-            numerals.add(numeral);
-        }
-
-        return new RomanNumber(numerals);
+        return new RomanNumber(rangeClosed(1, times)
+                .mapToObj(idx -> numeral)
+                .collect(toList()));
     }
 
     static RomanNumber concat(RomanNumeral numeral, RomanNumber romanNumber) {
-        List<RomanNumeral> concatenated = new ArrayList<>();
-        concatenated.add(numeral);
-        concatenated.addAll(romanNumber.numerals);
+        List<RomanNumeral> concatenatedNumerals = Stream.concat(Stream.of(numeral), romanNumber.numerals.stream())
+                .collect(toList());
 
-        return new RomanNumber(concatenated);
+        return new RomanNumber(concatenatedNumerals);
     }
 
     static RomanNumber of(RomanNumeral... numerals) {

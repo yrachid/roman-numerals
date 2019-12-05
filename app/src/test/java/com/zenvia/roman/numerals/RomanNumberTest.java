@@ -8,7 +8,7 @@ import static com.zenvia.roman.numerals.RomanNumeral.X;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class CompoundRomanNumeralTest {
+public class RomanNumberTest {
 
     @Test
     public void creates_compound_numeral_from_repetition() {

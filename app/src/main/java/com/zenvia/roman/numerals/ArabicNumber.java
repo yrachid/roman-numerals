@@ -1,5 +1,6 @@
 package com.zenvia.roman.numerals;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import static java.lang.Integer.parseInt;
@@ -9,12 +10,12 @@ import static java.util.stream.Collectors.joining;
 
 public class ArabicNumber {
 
-    private static final int UNIT_INDEX = 3;
-    private static final int TENS_INDEX = 2;
-    private static final int HUNDRED_INDEX = 1;
-    private static final int THOUSAND_INDEX = 0;
+    private static final int UNIT_POSITION = 3;
+    private static final int TENS_POSITION = 2;
+    private static final int HUNDRED_POSITION = 1;
+    private static final int THOUSAND_POSITION = 0;
 
-    private static final ArabicNumber MAX_VALUE = new ArabicNumber(new String[]{"3", "0", "0", "0"});
+    public static final ArabicNumber MAX_VALUE = new ArabicNumber(new String[]{"3", "0", "0", "0"});
     private static final ArabicNumber MIN_VALUE = new ArabicNumber(new String[]{"0", "0", "0", "1"});
 
     private final String[] positionalValues;
@@ -28,23 +29,36 @@ public class ArabicNumber {
     }
 
     public int unit() {
-        return valueAt(UNIT_INDEX);
+        return valueAt(UNIT_POSITION);
     }
 
     public int tens() {
-        return valueAt(TENS_INDEX);
+        return valueAt(TENS_POSITION);
     }
 
     public int hundred() {
-        return valueAt(HUNDRED_INDEX);
+        return valueAt(HUNDRED_POSITION);
     }
 
     public int thousand() {
-        return valueAt(THOUSAND_INDEX);
+        return valueAt(THOUSAND_POSITION);
     }
 
     private int valueAt(int index) {
         return parseInt(positionalValues[index]);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArabicNumber number = (ArabicNumber) o;
+        return Arrays.equals(positionalValues, number.positionalValues);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(positionalValues);
     }
 
     public static ArabicNumber of(int value) {
