@@ -15,11 +15,11 @@ public final class InputParsingResult implements Either<InvalidInputFailure, Ara
         this.left = left;
     }
 
-    public static InputParsingResult success(ArabicNumber number) {
+    static InputParsingResult success(ArabicNumber number) {
         return new InputParsingResult(number, null);
     }
 
-    public static InputParsingResult failure(InvalidInputFailure error) {
+    static InputParsingResult failure(InvalidInputFailure error) {
         return new InputParsingResult(null, error);
     }
 

@@ -1,8 +1,6 @@
-package com.zenvia.roman;
+package com.zenvia.roman.input;
 
-import com.zenvia.roman.input.InputParsingResult;
 import com.zenvia.roman.numerals.ArabicNumber;
-import com.zenvia.roman.input.UserInputParser;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 

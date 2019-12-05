@@ -1,6 +1,5 @@
-package com.zenvia.roman;
+package com.zenvia.roman.converters;
 
-import com.zenvia.roman.converters.PivotBasedPositionalConverter;
 import com.zenvia.roman.numerals.RomanNumber;
 import org.junit.Test;
 

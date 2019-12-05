@@ -16,8 +16,7 @@ public class Main {
         });
 
         result.right().ifPresent(value -> {
-            String conversionResult = ArabicToRomanNumeralConverter.convert(value.intValue());
-            System.out.println(conversionResult);
+            System.out.println(ArabicToRomanNumeralConverter.convert(value));
         });
     }
 }

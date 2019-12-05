@@ -11,25 +11,16 @@ import static com.zenvia.roman.numerals.RomanNumeral.M;
 
 public class ArabicToRomanNumeralConverter {
 
-    public static String convert(int arabicValue) {
+    public static RomanNumber convert(ArabicNumber arabicNumber) {
 
-        try {
+        RomanNumber thousand = M.repeat(arabicNumber.thousand());
+        RomanNumber hundred = pivoting(HUNDRED).convert(arabicNumber.hundred() * 100);
+        RomanNumber tens = pivoting(TENS).convert(arabicNumber.tens() * 10);
+        RomanNumber unit = pivoting(UNIT).convert(arabicNumber.unit());
 
-            ArabicNumber arabicNumber = ArabicNumber.of(arabicValue);
-
-            RomanNumber thousand = M.repeat(arabicNumber.thousand());
-            RomanNumber hundred = pivoting(HUNDRED).convert(arabicNumber.hundred() * 100);
-            RomanNumber tens = pivoting(TENS).convert(arabicNumber.tens() * 10);
-            RomanNumber unit = pivoting(UNIT).convert(arabicNumber.unit());
-
-            return thousand
-                    .concat(hundred)
-                    .concat(tens)
-                    .concat(unit)
-                    .toString();
-
-        } catch (IllegalArgumentException ex) {
-            return "ERROR";
-        }
+        return thousand
+                .concat(hundred)
+                .concat(tens)
+                .concat(unit);
     }
 }
