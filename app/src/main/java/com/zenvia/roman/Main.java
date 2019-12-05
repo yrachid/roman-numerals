@@ -1,30 +1,23 @@
 package com.zenvia.roman;
 
 import com.zenvia.roman.converters.ArabicToRomanNumeralConverter;
+import com.zenvia.roman.input.InputParsingResult;
+import com.zenvia.roman.input.UserInputParser;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        if (args.length == 0) {
-            System.err.println("No input");
+        InputParsingResult result = UserInputParser.parse(args);
+
+        result.left().ifPresent(error -> {
+            System.out.println(error);
             System.exit(1);
-        }
+        });
 
-        String argument = args[0];
-
-        if (argument == null || argument.isEmpty()) {
-            System.err.println("No input");
-            System.exit(1);
-        }
-
-        if (!argument.matches("\\d+")) {
-            System.err.println(String.format("Bad input '%s'. Provide an integer.", argument));
-            System.exit(1);
-        }
-
-        int input = Integer.parseInt(argument);
-
-        System.out.println(ArabicToRomanNumeralConverter.convert(input));
+        result.right().ifPresent(value -> {
+            String conversionResult = ArabicToRomanNumeralConverter.convert(value.intValue());
+            System.out.println(conversionResult);
+        });
     }
 }

@@ -2,8 +2,10 @@
 - [ ] O processamento de entrada deve ser mais elaborado
   - [ ] Criar classes para lidar com isso ao inves de fazer no metodo main
 - [ ] Teste funcional deve receber parametros
-- [ ] Criar package para conversores
 - [ ] Criar git tag para identificar quando uma parte do desafio estiver finalizada
+- [ ] Extrair Pivots
+- [ ] Simplificar API do Either
+  - [ ] Encontrar maneiras de testar o callback
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral
@@ -13,3 +15,4 @@
   - [X] ArabicNumeral -> ArabicNumber
   - [X] CompoundNumeral -> RomanNumber
 - [X] Eliminar conversao de equivalentes diretos
+- [X] Criar package para conversores
