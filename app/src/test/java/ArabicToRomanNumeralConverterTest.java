@@ -1,10 +1,10 @@
 import org.junit.Test;
 
-import static com.zenvia.roman.RomanNumeralConverter.convert;
+import static com.zenvia.roman.ArabicToRomanNumeralConverter.convert;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class RomanNumeralConverterTest {
+public class ArabicToRomanNumeralConverterTest {
 
     @Test
     public void must_not_convert_values_greater_than_3000_or_smaller_than_1() {

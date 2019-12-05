@@ -23,6 +23,6 @@ public class Main {
 
         int input = Integer.parseInt(argument);
 
-        System.out.println(RomanNumeralConverter.convert(input));
+        System.out.println(ArabicToRomanNumeralConverter.convert(input));
     }
 }

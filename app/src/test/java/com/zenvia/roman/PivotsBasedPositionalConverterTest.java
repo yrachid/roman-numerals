@@ -6,17 +6,24 @@ import org.junit.Test;
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.HUNDRED;
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.TENS;
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.UNIT;
+import static com.zenvia.roman.PivotBasedPositionalConverter.pivoting;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class PivotsBasedPositionalConverterTest {
 
     @Test
+    public void returns_empty_when_value_is_zero_regardless_of_pivoting_strategy() {
+        assertThat(pivoting(UNIT).convert(0), equalTo(CompoundNumeral.empty()));
+        assertThat(pivoting(TENS).convert(0), equalTo(CompoundNumeral.empty()));
+        assertThat(pivoting(HUNDRED).convert(0), equalTo(CompoundNumeral.empty()));
+    }
+
+    @Test
     public void converts_units_using_the_units_pivot() {
 
-        PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(UNIT);
+        PivotBasedPositionalConverter pivotConverter = pivoting(UNIT);
 
-        CompoundNumeral zero = pivotConverter.convert(0);
         CompoundNumeral one = pivotConverter.convert(1);
         CompoundNumeral four = pivotConverter.convert(4);
         CompoundNumeral five = pivotConverter.convert(5);
@@ -24,7 +31,6 @@ public class PivotsBasedPositionalConverterTest {
         CompoundNumeral nine = pivotConverter.convert(9);
         CompoundNumeral ten = pivotConverter.convert(10);
 
-        assertThat(zero.toString(), equalTo(""));
         assertThat(one.toString(), equalTo("I"));
         assertThat(four.toString(), equalTo("IV"));
         assertThat(five.toString(), equalTo("V"));
@@ -36,7 +42,7 @@ public class PivotsBasedPositionalConverterTest {
     @Test
     public void converts_tens_using_tens_pivot() {
 
-        PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(TENS);
+        PivotBasedPositionalConverter pivotConverter = pivoting(TENS);
 
         CompoundNumeral ten = pivotConverter.convert(10);
         CompoundNumeral thirty = pivotConverter.convert(30);
@@ -58,7 +64,7 @@ public class PivotsBasedPositionalConverterTest {
     @Test
     public void converts_hundred_using_hundred_pivot() {
 
-        PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(HUNDRED);
+        PivotBasedPositionalConverter pivotConverter = pivoting(HUNDRED);
 
         CompoundNumeral oneHundred = pivotConverter.convert(100);
         CompoundNumeral threeHundred = pivotConverter.convert(300);

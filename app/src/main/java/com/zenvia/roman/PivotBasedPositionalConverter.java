@@ -72,8 +72,9 @@ public class PivotBasedPositionalConverter {
         }
 
         if (pivots.isBetweenMiddleAndRightPredecessor(unit)) {
-            CompoundNumeral n = pivots.left.repeat(pivots.repetitionStrategy.apply(unit - pivots.middle.intValue()));
-            return pivots.middle.concat(n);
+            int postfixRepetitions = pivots.repetitionStrategy.apply(unit - pivots.middle.intValue());
+
+            return pivots.middle.concat(pivots.left.repeat(postfixRepetitions));
         }
 
         if (pivots.isMiddlePredecessor(unit)) {
