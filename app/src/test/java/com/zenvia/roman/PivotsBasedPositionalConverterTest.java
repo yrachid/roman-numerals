@@ -1,6 +1,6 @@
 package com.zenvia.roman;
 
-import com.zenvia.roman.numerals.CompoundNumeral;
+import com.zenvia.roman.numerals.RomanNumber;
 import org.junit.Test;
 
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.HUNDRED;
@@ -14,9 +14,9 @@ public class PivotsBasedPositionalConverterTest {
 
     @Test
     public void returns_empty_when_value_is_zero_regardless_of_pivoting_strategy() {
-        assertThat(pivoting(UNIT).convert(0), equalTo(CompoundNumeral.empty()));
-        assertThat(pivoting(TENS).convert(0), equalTo(CompoundNumeral.empty()));
-        assertThat(pivoting(HUNDRED).convert(0), equalTo(CompoundNumeral.empty()));
+        assertThat(pivoting(UNIT).convert(0), equalTo(RomanNumber.empty()));
+        assertThat(pivoting(TENS).convert(0), equalTo(RomanNumber.empty()));
+        assertThat(pivoting(HUNDRED).convert(0), equalTo(RomanNumber.empty()));
     }
 
     @Test
@@ -24,12 +24,12 @@ public class PivotsBasedPositionalConverterTest {
 
         PivotBasedPositionalConverter pivotConverter = pivoting(UNIT);
 
-        CompoundNumeral one = pivotConverter.convert(1);
-        CompoundNumeral four = pivotConverter.convert(4);
-        CompoundNumeral five = pivotConverter.convert(5);
-        CompoundNumeral seven = pivotConverter.convert(7);
-        CompoundNumeral nine = pivotConverter.convert(9);
-        CompoundNumeral ten = pivotConverter.convert(10);
+        RomanNumber one = pivotConverter.convert(1);
+        RomanNumber four = pivotConverter.convert(4);
+        RomanNumber five = pivotConverter.convert(5);
+        RomanNumber seven = pivotConverter.convert(7);
+        RomanNumber nine = pivotConverter.convert(9);
+        RomanNumber ten = pivotConverter.convert(10);
 
         assertThat(one.toString(), equalTo("I"));
         assertThat(four.toString(), equalTo("IV"));
@@ -44,13 +44,13 @@ public class PivotsBasedPositionalConverterTest {
 
         PivotBasedPositionalConverter pivotConverter = pivoting(TENS);
 
-        CompoundNumeral ten = pivotConverter.convert(10);
-        CompoundNumeral thirty = pivotConverter.convert(30);
-        CompoundNumeral forty = pivotConverter.convert(40);
-        CompoundNumeral fifty = pivotConverter.convert(50);
-        CompoundNumeral seventy = pivotConverter.convert(70);
-        CompoundNumeral ninety = pivotConverter.convert(90);
-        CompoundNumeral oneHundred = pivotConverter.convert(100);
+        RomanNumber ten = pivotConverter.convert(10);
+        RomanNumber thirty = pivotConverter.convert(30);
+        RomanNumber forty = pivotConverter.convert(40);
+        RomanNumber fifty = pivotConverter.convert(50);
+        RomanNumber seventy = pivotConverter.convert(70);
+        RomanNumber ninety = pivotConverter.convert(90);
+        RomanNumber oneHundred = pivotConverter.convert(100);
 
         assertThat(ten.toString(), equalTo("X"));
         assertThat(thirty.toString(), equalTo("XXX"));
@@ -66,13 +66,13 @@ public class PivotsBasedPositionalConverterTest {
 
         PivotBasedPositionalConverter pivotConverter = pivoting(HUNDRED);
 
-        CompoundNumeral oneHundred = pivotConverter.convert(100);
-        CompoundNumeral threeHundred = pivotConverter.convert(300);
-        CompoundNumeral fourHundred = pivotConverter.convert(400);
-        CompoundNumeral fiveHundred = pivotConverter.convert(500);
-        CompoundNumeral sevenHundred = pivotConverter.convert(700);
-        CompoundNumeral nineHundred = pivotConverter.convert(900);
-        CompoundNumeral oneThousand = pivotConverter.convert(1000);
+        RomanNumber oneHundred = pivotConverter.convert(100);
+        RomanNumber threeHundred = pivotConverter.convert(300);
+        RomanNumber fourHundred = pivotConverter.convert(400);
+        RomanNumber fiveHundred = pivotConverter.convert(500);
+        RomanNumber sevenHundred = pivotConverter.convert(700);
+        RomanNumber nineHundred = pivotConverter.convert(900);
+        RomanNumber oneThousand = pivotConverter.convert(1000);
 
         assertThat(oneHundred.toString(), equalTo("C"));
         assertThat(threeHundred.toString(), equalTo("CCC"));

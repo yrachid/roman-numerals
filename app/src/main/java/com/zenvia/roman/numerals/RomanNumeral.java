@@ -19,19 +19,19 @@ public enum RomanNumeral {
         return value;
     }
 
-    public static CompoundNumeral compose(RomanNumeral... numerals) {
-        return CompoundNumeral.of(numerals);
+    public static RomanNumber compose(RomanNumeral... numerals) {
+        return RomanNumber.of(numerals);
     }
 
-    public CompoundNumeral repeat(int iterations) {
-        return CompoundNumeral.repeating(this, iterations);
+    public RomanNumber repeat(int iterations) {
+        return RomanNumber.repeating(this, iterations);
     }
 
-    public CompoundNumeral concat(CompoundNumeral postfix) {
-        return CompoundNumeral.concat(this, postfix);
+    public RomanNumber concat(RomanNumber postfix) {
+        return RomanNumber.concat(this, postfix);
     }
 
-    public CompoundNumeral identity() {
-        return CompoundNumeral.of(this);
+    public RomanNumber identity() {
+        return RomanNumber.of(this);
     }
 }

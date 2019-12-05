@@ -1,6 +1,6 @@
 package com.zenvia.roman;
 
-import com.zenvia.roman.numerals.CompoundNumeral;
+import com.zenvia.roman.numerals.RomanNumber;
 import com.zenvia.roman.numerals.RomanNumeral;
 
 import java.util.function.Function;
@@ -61,10 +61,10 @@ public class PivotBasedPositionalConverter {
         }
     }
 
-    public CompoundNumeral convert(int unit) {
+    public RomanNumber convert(int unit) {
 
         if (unit == 0) {
-            return CompoundNumeral.empty();
+            return RomanNumber.empty();
         }
 
         if (pivots.isBetweenLeftAndMiddlePredecessor(unit)) {

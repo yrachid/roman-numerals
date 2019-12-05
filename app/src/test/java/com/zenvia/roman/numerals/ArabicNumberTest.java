@@ -7,7 +7,7 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class ArabicNumeralTest {
+public class ArabicNumberTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -17,7 +17,7 @@ public class ArabicNumeralTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("Arabic numerals greater than 3000 are not supported");
 
-        ArabicNumeral.of(3001);
+        ArabicNumber.of(3001);
     }
 
     @Test
@@ -25,15 +25,15 @@ public class ArabicNumeralTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("Arabic numerals smaller than 1 are not supported");
 
-        ArabicNumeral.of(0);
+        ArabicNumber.of(0);
     }
 
     @Test
     public void allocates_values_with_multiple_position_layouts() {
-        ArabicNumeral one = ArabicNumeral.of(1);
-        ArabicNumeral ten = ArabicNumeral.of(10);
-        ArabicNumeral twoHundred = ArabicNumeral.of(201);
-        ArabicNumeral oneThousandAndOne = ArabicNumeral.of(1001);
+        ArabicNumber one = ArabicNumber.of(1);
+        ArabicNumber ten = ArabicNumber.of(10);
+        ArabicNumber twoHundred = ArabicNumber.of(201);
+        ArabicNumber oneThousandAndOne = ArabicNumber.of(1001);
 
         assertThat(one.unit(), equalTo(1));
         assertThat(one.tens(), equalTo(0));

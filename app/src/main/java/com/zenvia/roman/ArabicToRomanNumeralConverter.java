@@ -1,7 +1,7 @@
 package com.zenvia.roman;
 
-import com.zenvia.roman.numerals.ArabicNumeral;
-import com.zenvia.roman.numerals.CompoundNumeral;
+import com.zenvia.roman.numerals.ArabicNumber;
+import com.zenvia.roman.numerals.RomanNumber;
 
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.HUNDRED;
 import static com.zenvia.roman.PivotBasedPositionalConverter.Pivots.TENS;
@@ -15,12 +15,12 @@ public class ArabicToRomanNumeralConverter {
 
         try {
 
-            ArabicNumeral arabicNumeral = ArabicNumeral.of(arabicValue);
+            ArabicNumber arabicNumber = ArabicNumber.of(arabicValue);
 
-            CompoundNumeral thousand = M.repeat(arabicNumeral.thousand());
-            CompoundNumeral hundred = pivoting(HUNDRED).convert(arabicNumeral.hundred() * 100);
-            CompoundNumeral tens = pivoting(TENS).convert(arabicNumeral.tens() * 10);
-            CompoundNumeral unit = pivoting(UNIT).convert(arabicNumeral.unit());
+            RomanNumber thousand = M.repeat(arabicNumber.thousand());
+            RomanNumber hundred = pivoting(HUNDRED).convert(arabicNumber.hundred() * 100);
+            RomanNumber tens = pivoting(TENS).convert(arabicNumber.tens() * 10);
+            RomanNumber unit = pivoting(UNIT).convert(arabicNumber.unit());
 
             return thousand
                     .concat(hundred)
