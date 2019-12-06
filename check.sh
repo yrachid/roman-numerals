@@ -1,20 +1,17 @@
 #!/bin/bash -eu
 
+readonly DEFAULT_TEST_VALUES=("1" "0" "7" "10" "3000" "lizard" "1979" "10000" "   ")
+readonly JAR_PATH="${PWD}/app/build/libs/app-1.0.jar"
+
 docker_build() {
   docker build -t roman-number-converter .
 }
 
 execute() {
-  local input=$1
-  local result=$(docker run roman-number-converter app.jar "${input}")
-  echo -e "${input}\t->\t${result}"
+  java \
+    -jar "${JAR_PATH}" "${DEFAULT_TEST_VALUES[@]}"
 }
 
-docker_build
+./gradlew clean build
 
-execute 1
-execute 7
-execute 10
-execute lizard
-execute 0
-execute 3001
+execute

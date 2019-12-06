@@ -2,17 +2,17 @@ package com.zenvia.roman.input;
 
 import com.zenvia.roman.numerals.ArabicNumber;
 
-public class UserInputParser {
+public class SingleParameterParser {
 
     private static final String NUMERIC_PATTERN = "\\d{1,4}";
 
-    public static InputParsingResult parse(String[] arguments) {
+    public static InputParsingResult parse(String params) {
 
-        if (arguments == null || arguments.length == 0 || arguments[0].trim().isEmpty()) {
+        if (params == null || params.trim().isEmpty()) {
             return InputParsingResult.failure(InvalidInputFailure.withMessage("Input is empty"));
         }
 
-        if (!arguments[0].matches(NUMERIC_PATTERN)) {
+        if (!params.matches(NUMERIC_PATTERN)) {
             return InputParsingResult.failure(InvalidInputFailure.withMessage(String.format(
                     "Input must be an integer number. It must also not be greater than %d",
                     ArabicNumber.MAX_VALUE.intValue()
@@ -20,7 +20,7 @@ public class UserInputParser {
         }
 
         try {
-            int inputAsInt = Integer.parseInt(arguments[0]);
+            int inputAsInt = Integer.parseInt(params);
 
             return InputParsingResult.success(ArabicNumber.of(inputAsInt));
         } catch (IllegalArgumentException exception) {
