@@ -5,7 +5,7 @@ import com.zenvia.roman.input.SingleParameterParser;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static com.zenvia.roman.converters.ArabicToRomanNumeralConverter.convert;
+import static com.zenvia.roman.converters.ArabicToRomanNumberConverter.convert;
 
 public class Main {
 

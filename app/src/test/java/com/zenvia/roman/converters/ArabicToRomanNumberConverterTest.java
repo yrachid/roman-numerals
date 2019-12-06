@@ -4,11 +4,11 @@ import com.zenvia.roman.numerals.ArabicNumber;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
-import static com.zenvia.roman.converters.ArabicToRomanNumeralConverter.convert;
+import static com.zenvia.roman.converters.ArabicToRomanNumberConverter.convert;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ArabicToRomanNumeralConverterTest {
+public class ArabicToRomanNumberConverterTest {
 
     @Test
     public void converts_values_with_direct_equivalent_numerals() {
