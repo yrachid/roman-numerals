@@ -1,4 +1,4 @@
-name: Java CI
+name: Number Converter CI
 
 on: [push]
 
@@ -13,5 +13,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Unit tests
+      run: ./gradlew test
+
+    - name: Functional tests
+      run: ./gradlew functionalTest
+
+    - name: Execute generated jar
+      run: ./scripts/build-and-run.sh

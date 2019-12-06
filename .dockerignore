@@ -1,0 +1,12 @@
+.github
+.gradle
+.idea
+.git
+/**/build/
+.gitignore
+*.swp
+*.md
+*.todo
+scripts/
+test-values
+Dockerfile
