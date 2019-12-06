@@ -24,12 +24,12 @@ public final class InputParsingResult implements Either<InvalidInputFailure, Ara
     }
 
     @Override
-    public Optional<ArabicNumber> right() {
+    public Optional<ArabicNumber> success() {
         return Optional.ofNullable(right);
     }
 
     @Override
-    public Optional<InvalidInputFailure> left() {
+    public Optional<InvalidInputFailure> error() {
         return Optional.ofNullable(left);
     }
 }

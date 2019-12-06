@@ -10,12 +10,12 @@ public class Main {
 
         InputParsingResult result = UserInputParser.parse(args);
 
-        result.left().ifPresent(error -> {
+        result.error().ifPresent(error -> {
             System.out.println(error);
             System.exit(1);
         });
 
-        result.right().ifPresent(value -> {
+        result.success().ifPresent(value -> {
             System.out.println(ArabicToRomanNumeralConverter.convert(value));
         });
     }

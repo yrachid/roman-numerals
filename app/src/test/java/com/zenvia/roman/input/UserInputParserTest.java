@@ -13,7 +13,7 @@ public class UserInputParserTest {
     public void fails_when_arg_array_is_empty() {
         InputParsingResult emptyArgArray = UserInputParser.parse(new String[]{});
 
-        assertThat(emptyArgArray.right().isPresent(), equalTo(false));
+        assertThat(emptyArgArray.success().isPresent(), equalTo(false));
         assertFailureMessageOf(emptyArgArray, hasCause("Input is empty"));
     }
 
@@ -21,7 +21,7 @@ public class UserInputParserTest {
     public void fails_when_first_position_of_arg_array_is_empty() {
         InputParsingResult emptyParam = UserInputParser.parse(new String[]{""});
 
-        assertThat(emptyParam.right().isPresent(), equalTo(false));
+        assertThat(emptyParam.success().isPresent(), equalTo(false));
         assertFailureMessageOf(emptyParam, hasCause("Input is empty"));
     }
 
@@ -29,7 +29,7 @@ public class UserInputParserTest {
     public void fails_when_first_position_of_arg_array_is_empty_space() {
         InputParsingResult emptySpaceParam = UserInputParser.parse(new String[]{"  "});
 
-        assertThat(emptySpaceParam.right().isPresent(), equalTo(false));
+        assertThat(emptySpaceParam.success().isPresent(), equalTo(false));
         assertFailureMessageOf(emptySpaceParam, hasCause("Input is empty"));
     }
 
@@ -37,7 +37,7 @@ public class UserInputParserTest {
     public void fails_with_null_input() {
         InputParsingResult result = UserInputParser.parse(null);
 
-        assertThat(result.right().isPresent(), equalTo(false));
+        assertThat(result.success().isPresent(), equalTo(false));
         assertFailureMessageOf(result, hasCause("Input is empty"));
     }
 
@@ -45,7 +45,7 @@ public class UserInputParserTest {
     public void fails_with_non_numeric_input() {
         InputParsingResult nanParam = UserInputParser.parse(new String[]{"A"});
 
-        assertThat(nanParam.right().isPresent(), equalTo(false));
+        assertThat(nanParam.success().isPresent(), equalTo(false));
         assertFailureMessageOf(nanParam, hasCause("Input must be an integer number. It must also not be greater than 3000"));
     }
 
@@ -53,7 +53,7 @@ public class UserInputParserTest {
     public void fails_with_numbers_beyond_maximum_allowed_value() {
         InputParsingResult hugeNumber = UserInputParser.parse(new String[]{"10000000000000000000000000000000000000000000"});
 
-        assertThat(hugeNumber.right().isPresent(), equalTo(false));
+        assertThat(hugeNumber.success().isPresent(), equalTo(false));
         assertFailureMessageOf(hugeNumber, hasCause("Input must be an integer number. It must also not be greater than 3000"));
     }
 
@@ -61,7 +61,7 @@ public class UserInputParserTest {
     public void fails_with_numbers_below_maximum_allowed_value() {
         InputParsingResult zero = UserInputParser.parse(new String[]{"0"});
 
-        assertThat(zero.right().isPresent(), equalTo(false));
+        assertThat(zero.success().isPresent(), equalTo(false));
         assertFailureMessageOf(zero, hasCause("Arabic numerals smaller than 1 are not supported"));
     }
 
@@ -70,14 +70,14 @@ public class UserInputParserTest {
         InputParsingResult ten = UserInputParser.parse(new String[]{"10"});
         InputParsingResult threeThousand = UserInputParser.parse(new String[]{"3000"});
 
-        assertThat(ten.left().isPresent(), equalTo(false));
-        assertThat(ten.right().get(), equalTo(ArabicNumber.of(10)));
-        assertThat(threeThousand.right().get(), equalTo(ArabicNumber.of(3000)));
+        assertThat(ten.error().isPresent(), equalTo(false));
+        assertThat(ten.success().get(), equalTo(ArabicNumber.of(10)));
+        assertThat(threeThousand.success().get(), equalTo(ArabicNumber.of(3000)));
     }
 
     private void assertFailureMessageOf(InputParsingResult result, Matcher<String> matcher) {
-        assertThat(result.left().isPresent(), equalTo(true));
-        assertThat(result.left().get().toString(), matcher);
+        assertThat(result.error().isPresent(), equalTo(true));
+        assertThat(result.error().get().toString(), matcher);
     }
 
     private Matcher<String> hasCause(String partialMessage) {
