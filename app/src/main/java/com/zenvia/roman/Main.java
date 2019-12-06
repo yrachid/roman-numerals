@@ -13,16 +13,17 @@ public class Main {
         System.out.println();
         System.out.println("Received Args: " + Arrays.toString(args));
         System.out.println();
+
         Stream.of(args)
                 .map(SingleParameterParser::parse)
                 .forEach(result -> {
 
-                    result.error().ifPresent(err -> {
-                        System.out.println(String.format("%s\t:\t%s", result.rawInput(), err));
+                    result.error((input, err) -> {
+                        System.out.println(String.format("%s\t:\t%s", input, err));
                     });
 
-                    result.success().ifPresent(success -> {
-                        System.out.println(String.format("%s\t:\t%s", result.rawInput(), convert(success)));
+                    result.success((input, success) -> {
+                        System.out.println(String.format("%s\t:\t%s", input, convert(success)));
                     });
                 });
     }

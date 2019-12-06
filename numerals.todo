@@ -3,9 +3,6 @@
   - [ ] Configurar testes funcionais
 - [ ] Teste funcional deve receber parametros
 - [ ] Criar git tag para identificar quando uma parte do desafio estiver finalizada
-- [ ] Suportar multiplas entradas
-- [ ] Remover Either
-- [ ] Implementar parsing result utilizando Pair ou BiConsumer
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral
@@ -19,3 +16,6 @@
 - [X] Extrair Pivots
 - [X] O processamento de entrada deve ser mais elaborado
   - [X] Criar classes para lidar com isso ao inves de fazer no metodo main
+- [X] Remover Either
+- [X] Implementar parsing result utilizando Pair ou BiConsumer
+- [X] Suportar multiplas entradas

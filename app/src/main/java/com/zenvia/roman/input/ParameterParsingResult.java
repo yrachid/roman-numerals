@@ -2,7 +2,7 @@ package com.zenvia.roman.input;
 
 import com.zenvia.roman.numerals.ArabicNumber;
 
-import java.util.Optional;
+import java.util.function.BiConsumer;
 
 public final class ParameterParsingResult {
 
@@ -24,15 +24,15 @@ public final class ParameterParsingResult {
         return new ParameterParsingResult(rawInput, null, error);
     }
 
-    public String rawInput() {
-        return rawInput;
+    public void error(BiConsumer<String, InvalidParameterFailure> callback) {
+        if (left != null) {
+            callback.accept(rawInput, left);
+        }
     }
 
-    public Optional<ArabicNumber> success() {
-        return Optional.ofNullable(right);
-    }
-
-    public Optional<InvalidParameterFailure> error() {
-        return Optional.ofNullable(left);
+    public void success(BiConsumer<String, ArabicNumber> callback) {
+        if (right != null) {
+            callback.accept(rawInput, right);
+        }
     }
 }
