@@ -11,63 +11,73 @@ public class SingleParameterParserTest {
 
     @Test
     public void fails_when_param_is_empty() {
-        InputParsingResult empty = SingleParameterParser.parse("");
+        ParameterParsingResult empty = SingleParameterParser.parse("");
 
         assertThat(empty.success().isPresent(), equalTo(false));
+        assertThat(empty.rawInput(), equalTo(""));
         assertFailureMessageOf(empty, hasCause("Input is empty"));
     }
 
     @Test
     public void fails_when_is_empty_space() {
-        InputParsingResult emptySpace = SingleParameterParser.parse(" ");
+        ParameterParsingResult emptySpace = SingleParameterParser.parse(" ");
 
         assertThat(emptySpace.success().isPresent(), equalTo(false));
+        assertThat(emptySpace.rawInput(), equalTo(" "));
         assertFailureMessageOf(emptySpace, hasCause("Input is empty"));
     }
 
     @Test
     public void fails_when_param_is_null() {
-        InputParsingResult nullParam = SingleParameterParser.parse(null);
+        ParameterParsingResult nullParam = SingleParameterParser.parse(null);
 
         assertThat(nullParam.success().isPresent(), equalTo(false));
+        assertThat(nullParam.rawInput(), equalTo(null));
         assertFailureMessageOf(nullParam, hasCause("Input is empty"));
     }
 
     @Test
     public void fails_with_non_numeric_input() {
-        InputParsingResult nanParam = SingleParameterParser.parse("A");
+        ParameterParsingResult nanParam = SingleParameterParser.parse("A");
 
         assertThat(nanParam.success().isPresent(), equalTo(false));
+        assertThat(nanParam.rawInput(), equalTo("A"));
         assertFailureMessageOf(nanParam, hasCause("Input must be an integer number. It must also not be greater than 3000"));
     }
 
     @Test
     public void fails_with_numbers_beyond_maximum_allowed_value() {
-        InputParsingResult hugeNumber = SingleParameterParser.parse("10000000000000000000000000000000000000000000");
+        ParameterParsingResult hugeNumber = SingleParameterParser.parse("10000000000000000000000000000000000000000000");
 
         assertThat(hugeNumber.success().isPresent(), equalTo(false));
+        assertThat(hugeNumber.rawInput(), equalTo("10000000000000000000000000000000000000000000"));
         assertFailureMessageOf(hugeNumber, hasCause("Input must be an integer number. It must also not be greater than 3000"));
     }
 
     @Test
     public void fails_with_numbers_below_maximum_allowed_value() {
-        InputParsingResult zero = SingleParameterParser.parse("0");
+        ParameterParsingResult zero = SingleParameterParser.parse("0");
 
         assertThat(zero.success().isPresent(), equalTo(false));
+        assertThat(zero.rawInput(), equalTo("0"));
         assertFailureMessageOf(zero, hasCause("Arabic numerals smaller than 1 are not supported"));
     }
 
     @Test
     public void succeeds_with_a_value_within_the_supported_range() {
-        InputParsingResult ten = SingleParameterParser.parse("10");
-        InputParsingResult threeThousand = SingleParameterParser.parse("3000");
+        ParameterParsingResult ten = SingleParameterParser.parse("10");
+        ParameterParsingResult threeThousand = SingleParameterParser.parse("3000");
 
+        assertThat(ten.rawInput(), equalTo("10"));
         assertThat(ten.error().isPresent(), equalTo(false));
         assertThat(ten.success().get(), equalTo(ArabicNumber.of(10)));
+
+        assertThat(threeThousand.rawInput(), equalTo("3000"));
+        assertThat(threeThousand.error().isPresent(), equalTo(false));
         assertThat(threeThousand.success().get(), equalTo(ArabicNumber.of(3000)));
     }
 
-    private void assertFailureMessageOf(InputParsingResult result, Matcher<String> matcher) {
+    private void assertFailureMessageOf(ParameterParsingResult result, Matcher<String> matcher) {
         assertThat(result.error().isPresent(), equalTo(true));
         assertThat(result.error().get().toString(), matcher);
     }

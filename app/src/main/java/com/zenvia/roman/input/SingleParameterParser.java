@@ -6,25 +6,25 @@ public class SingleParameterParser {
 
     private static final String NUMERIC_PATTERN = "\\d{1,4}";
 
-    public static InputParsingResult parse(String params) {
+    public static ParameterParsingResult parse(String param) {
 
-        if (params == null || params.trim().isEmpty()) {
-            return InputParsingResult.failure(InvalidInputFailure.withMessage("Input is empty"));
+        if (param == null || param.trim().isEmpty()) {
+            return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage("Input is empty"));
         }
 
-        if (!params.matches(NUMERIC_PATTERN)) {
-            return InputParsingResult.failure(InvalidInputFailure.withMessage(String.format(
+        if (!param.matches(NUMERIC_PATTERN)) {
+            return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(String.format(
                     "Input must be an integer number. It must also not be greater than %d",
                     ArabicNumber.MAX_VALUE.intValue()
             )));
         }
 
         try {
-            int inputAsInt = Integer.parseInt(params);
+            int inputAsInt = Integer.parseInt(param);
 
-            return InputParsingResult.success(ArabicNumber.of(inputAsInt));
+            return ParameterParsingResult.success(param, ArabicNumber.of(inputAsInt));
         } catch (IllegalArgumentException exception) {
-            return InputParsingResult.failure(InvalidInputFailure.withMessage(exception.getMessage()));
+            return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(exception.getMessage()));
         }
 
     }

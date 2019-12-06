@@ -1,15 +1,15 @@
 package com.zenvia.roman.input;
 
-public class InvalidInputFailure {
+public class InvalidParameterFailure {
 
     private final String message;
 
-    private InvalidInputFailure(String message) {
+    private InvalidParameterFailure(String message) {
         this.message = message;
     }
 
-    static InvalidInputFailure withMessage(String message) {
-        return new InvalidInputFailure(message);
+    static InvalidParameterFailure withMessage(String message) {
+        return new InvalidParameterFailure(message);
     }
 
     @Override

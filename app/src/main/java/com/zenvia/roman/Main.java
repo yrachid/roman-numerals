@@ -1,6 +1,5 @@
 package com.zenvia.roman;
 
-import com.zenvia.roman.input.InputParsingResult;
 import com.zenvia.roman.input.SingleParameterParser;
 
 import java.util.Arrays;
@@ -10,30 +9,20 @@ import static com.zenvia.roman.converters.ArabicToRomanNumeralConverter.convert;
 
 public class Main {
 
-    private static final class Pair {
-        private final String param;
-        private final InputParsingResult result;
-
-        Pair(String param, InputParsingResult result) {
-            this.param = param;
-            this.result = result;
-        }
-    }
-
     public static void main(String[] args) {
         System.out.println();
         System.out.println("Received Args: " + Arrays.toString(args));
         System.out.println();
         Stream.of(args)
-                .map(param -> new Pair(param, SingleParameterParser.parse(param)))
-                .forEach(parsed -> {
+                .map(SingleParameterParser::parse)
+                .forEach(result -> {
 
-                    parsed.result.error().ifPresent(err -> {
-                        System.out.println(String.format("%s\t:\t%s", parsed.param, err));
+                    result.error().ifPresent(err -> {
+                        System.out.println(String.format("%s\t:\t%s", result.rawInput(), err));
                     });
 
-                    parsed.result.success().ifPresent(success -> {
-                        System.out.println(String.format("%s\t:\t%s", parsed.param, convert(success)));
+                    result.success().ifPresent(success -> {
+                        System.out.println(String.format("%s\t:\t%s", result.rawInput(), convert(success)));
                     });
                 });
     }
