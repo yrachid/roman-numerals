@@ -1,4 +1,4 @@
-name: Number Converter CI
+name: number-converter-ci
 
 on: [push]
 

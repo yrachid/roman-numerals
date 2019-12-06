@@ -1,5 +1,7 @@
 # Conversor de numerais
 
+![](https://github.com/yrachid/roman-numerals/workflows/number-converter-ci/badge.svg)
+
 Enunciado do problema http://codingdojo.org/kata/RomanNumerals/
 
 ### Tecnologias
