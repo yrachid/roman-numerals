@@ -1,12 +1,8 @@
-package com.zenvia.roman.converters;
+package com.yrachid.roman.converters;
 
-import com.zenvia.roman.numerals.RomanNumber;
+import com.yrachid.roman.numerals.RomanNumber;
 import org.junit.Test;
 
-import static com.zenvia.roman.converters.Pivots.HUNDRED;
-import static com.zenvia.roman.converters.Pivots.TENS;
-import static com.zenvia.roman.converters.Pivots.UNIT;
-import static com.zenvia.roman.converters.PivotBasedPositionalConverter.pivoting;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -14,15 +10,15 @@ public class PivotsBasedPositionalConverterTest {
 
     @Test
     public void returns_empty_when_value_is_zero_regardless_of_pivoting_strategy() {
-        assertThat(pivoting(UNIT).convert(0), equalTo(RomanNumber.empty()));
-        assertThat(pivoting(TENS).convert(0), equalTo(RomanNumber.empty()));
-        assertThat(pivoting(HUNDRED).convert(0), equalTo(RomanNumber.empty()));
+        assertThat(PivotBasedPositionalConverter.pivoting(Pivots.UNIT).convert(0), equalTo(RomanNumber.empty()));
+        assertThat(PivotBasedPositionalConverter.pivoting(Pivots.TENS).convert(0), equalTo(RomanNumber.empty()));
+        assertThat(PivotBasedPositionalConverter.pivoting(Pivots.HUNDRED).convert(0), equalTo(RomanNumber.empty()));
     }
 
     @Test
     public void converts_units_using_the_units_pivot() {
 
-        PivotBasedPositionalConverter pivotConverter = pivoting(UNIT);
+        PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(Pivots.UNIT);
 
         RomanNumber one = pivotConverter.convert(1);
         RomanNumber four = pivotConverter.convert(4);
@@ -42,7 +38,7 @@ public class PivotsBasedPositionalConverterTest {
     @Test
     public void converts_tens_using_tens_pivot() {
 
-        PivotBasedPositionalConverter pivotConverter = pivoting(TENS);
+        PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(Pivots.TENS);
 
         RomanNumber ten = pivotConverter.convert(10);
         RomanNumber thirty = pivotConverter.convert(30);
@@ -64,7 +60,7 @@ public class PivotsBasedPositionalConverterTest {
     @Test
     public void converts_hundred_using_hundred_pivot() {
 
-        PivotBasedPositionalConverter pivotConverter = pivoting(HUNDRED);
+        PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(Pivots.HUNDRED);
 
         RomanNumber oneHundred = pivotConverter.convert(100);
         RomanNumber threeHundred = pivotConverter.convert(300);

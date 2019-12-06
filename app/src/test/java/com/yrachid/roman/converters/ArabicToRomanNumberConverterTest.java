@@ -1,10 +1,9 @@
-package com.zenvia.roman.converters;
+package com.yrachid.roman.converters;
 
-import com.zenvia.roman.numerals.ArabicNumber;
+import com.yrachid.roman.numerals.ArabicNumber;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
-import static com.zenvia.roman.converters.ArabicToRomanNumberConverter.convert;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -71,6 +70,6 @@ public class ArabicToRomanNumberConverterTest {
     }
 
     private void converted(int value, Matcher<String> matcher) {
-        assertThat(convert(ArabicNumber.of(value)).toString(), matcher);
+        assertThat(ArabicToRomanNumberConverter.convert(ArabicNumber.of(value)).toString(), matcher);
     }
 }

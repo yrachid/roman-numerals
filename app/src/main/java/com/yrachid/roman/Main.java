@@ -1,11 +1,10 @@
-package com.zenvia.roman;
+package com.yrachid.roman;
 
-import com.zenvia.roman.input.SingleParameterParser;
+import com.yrachid.roman.converters.ArabicToRomanNumberConverter;
+import com.yrachid.roman.input.SingleParameterParser;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
-
-import static com.zenvia.roman.converters.ArabicToRomanNumberConverter.convert;
 
 public class Main {
 
@@ -23,7 +22,7 @@ public class Main {
                     });
 
                     result.success((input, success) -> {
-                        System.out.println(String.format("%s\t:\t%s", input, convert(success)));
+                        System.out.println(String.format("%s\t:\t%s", input, ArabicToRomanNumberConverter.convert(success)));
                     });
                 });
     }

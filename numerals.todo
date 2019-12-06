@@ -2,6 +2,8 @@
 - [ ] Github actinos
   - [ ] Configurar testes funcionais
 - [ ] Teste funcional deve receber parametros
+  - [ ] Criar task JavaExec
+  - [ ] gradle -P
 - [ ] Criar git tag para identificar quando uma parte do desafio estiver finalizada
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
