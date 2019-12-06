@@ -3,10 +3,10 @@ package com.yrachid.roman.converters;
 import com.yrachid.roman.numerals.ArabicNumber;
 import com.yrachid.roman.numerals.RomanNumber;
 
+import static com.yrachid.roman.converters.PivotBasedPositionalConverter.pivoting;
 import static com.yrachid.roman.converters.Pivots.HUNDRED;
 import static com.yrachid.roman.converters.Pivots.TENS;
 import static com.yrachid.roman.converters.Pivots.UNIT;
-import static com.yrachid.roman.converters.PivotBasedPositionalConverter.pivoting;
 import static com.yrachid.roman.numerals.RomanNumeral.M;
 
 public class ArabicToRomanNumberConverter {

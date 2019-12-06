@@ -50,3 +50,18 @@ Intencioalmente. Um objeto nao pode ser construido com um estado invalido, indep
         ------- MM X I
 ```
 
+```shell script
+    private static final String ROMAN_NUMBER_PATTERN = "[IVXLCDM]{1,11}";
+
+                "lizard", "0", "3001",
+                "I", "XLIX", "CCC", "MMCCCXXXIII"
+
+
+        assertThat(output.get(9), equalTo("I\t:\tI"));
+        assertThat(output.get(10), equalTo("XLIX\t:\tXLIX"));
+        assertThat(output.get(10), equalTo("CCC\t:\tCCC"));
+        assertThat(output.get(10), equalTo("MMCCCXXXIII\t:\tMMCCCXXXIII"));
+
+
+```
+

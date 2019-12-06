@@ -24,13 +24,16 @@ public class Application {
                 .map(SingleParameterParser::parse)
                 .forEach(result -> {
 
-                    result.error((input, err) -> {
-                        output.accept(String.format("%s\t:\t%s", input, err));
-                    });
+                    result.error(this::printFormattedOutput);
 
-                    result.success((input, success) -> {
-                        output.accept(String.format("%s\t:\t%s", input, ArabicToRomanNumberConverter.convert(success)));
-                    });
+                    result.romanNumber(this::printFormattedOutput);
+
+                    result.success((input, success) ->
+                            printFormattedOutput(input, ArabicToRomanNumberConverter.convert(success)));
                 });
+    }
+
+    private void printFormattedOutput(String input, Object err) {
+        output.accept(String.format("%s\t:\t%s", input, err.toString()));
     }
 }

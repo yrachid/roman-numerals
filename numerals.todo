@@ -1,10 +1,5 @@
 
-- [ ] Github actinos
-  - [ ] Configurar testes funcionais
-- [ ] Teste funcional deve receber parametros
-  - [ ] Criar task JavaExec
-  - [ ] gradle -P
-- [ ] Criar git tag para identificar quando uma parte do desafio estiver finalizada
+- [ ] Extrair operacoes de RomanNumber para uma classe RomanArithmetic?
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral
@@ -21,3 +16,9 @@
 - [X] Remover Either
 - [X] Implementar parsing result utilizando Pair ou BiConsumer
 - [X] Suportar multiplas entradas
+- [X] Github actinos
+  - [X] Configurar testes funcionais
+- [X] Teste funcional deve receber parametros
+  - [X] Criar task JavaExec
+  - [X] gradle -P
+- [X] Criar git tag para identificar quando uma parte do desafio estiver finalizada

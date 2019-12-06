@@ -14,93 +14,107 @@ public class SingleParameterParserTest {
 
     @Test
     public void fails_when_param_is_empty() {
-        ParameterParsingResult empty = SingleParameterParser.parse("");
-
-        empty.error((input, error) -> {
+        expectErrorFrom("", (input, error) -> {
             assertThat(input, equalTo(""));
             assertThat(error.toString(), hasCause("Input is empty"));
         });
-
-        empty.success(failBecauseOfUnexpectedSuccessCall());
     }
 
     @Test
     public void fails_when_is_empty_space() {
-        ParameterParsingResult emptySpace = SingleParameterParser.parse(" ");
-
-        emptySpace.error((input, error) -> {
+        expectErrorFrom(" ", (input, error) -> {
             assertThat(input, equalTo(" "));
             assertThat(error.toString(), hasCause("Input is empty"));
         });
-
-        emptySpace.success(failBecauseOfUnexpectedSuccessCall());
     }
 
     @Test
     public void fails_when_param_is_null() {
-        ParameterParsingResult nullParam = SingleParameterParser.parse(null);
-
-        nullParam.error((input, error) -> {
+        expectErrorFrom(null, (input, error) -> {
             assertThat(input, equalTo(null));
             assertThat(error.toString(), hasCause("Input is empty"));
         });
-
-        nullParam.success(failBecauseOfUnexpectedSuccessCall());
     }
 
     @Test
     public void fails_with_non_numeric_input() {
-        ParameterParsingResult nanParam = SingleParameterParser.parse("A");
-
-        nanParam.error((input, error) -> {
+        expectErrorFrom("A", (input, error) -> {
             assertThat(input, equalTo("A"));
             assertThat(error.toString(), hasCause("Input must be an integer number. It must also not be greater than 3000"));
         });
-
-        nanParam.success(failBecauseOfUnexpectedSuccessCall());
     }
 
     @Test
     public void fails_with_numbers_beyond_maximum_allowed_value() {
-        ParameterParsingResult hugeNumber = SingleParameterParser.parse("10000000000000000000000000000000000000000000");
-
-        hugeNumber.error((input, error) -> {
+        expectErrorFrom("10000000000000000000000000000000000000000000", (input, error) -> {
             assertThat(input, equalTo("10000000000000000000000000000000000000000000"));
             assertThat(error.toString(), hasCause("Input must be an integer number. It must also not be greater than 3000"));
         });
-
-        hugeNumber.success(failBecauseOfUnexpectedSuccessCall());
     }
 
     @Test
     public void fails_with_numbers_below_maximum_allowed_value() {
-        ParameterParsingResult zero = SingleParameterParser.parse("0");
-
-        zero.error((input, error) -> {
+        expectErrorFrom("0", (input, error) -> {
             assertThat(input, equalTo("0"));
             assertThat(error.toString(), hasCause("Arabic numerals smaller than 1 are not supported"));
         });
+    }
 
-        zero.success(failBecauseOfUnexpectedSuccessCall());
+    @Test
+    public void succeeds_with_roman_numeral_input() {
+        expectRomanValueFrom("I", (input, value) -> {
+            assertThat(input, equalTo("I"));
+            assertThat(value, equalTo("I"));
+        });
+
+        expectRomanValueFrom("II", (input, value) -> {
+            assertThat(input, equalTo("II"));
+            assertThat(value, equalTo("II"));
+        });
     }
 
     @Test
     public void succeeds_with_a_value_within_the_supported_range() {
-        ParameterParsingResult ten = SingleParameterParser.parse("10");
-        ParameterParsingResult threeThousand = SingleParameterParser.parse("3000");
-
-        ten.success((input, value) -> {
+        expectArabicNumberFrom("10", (input, value) -> {
             assertThat(input, equalTo("10"));
             assertThat(value, equalTo(ArabicNumber.of(10)));
         });
 
-        threeThousand.success((input, value) -> {
+        expectArabicNumberFrom("3000", (input, value) -> {
             assertThat(input, equalTo("3000"));
             assertThat(value, equalTo(ArabicNumber.of(3000)));
         });
+    }
 
-        ten.error(failBecauseOfUnexpectedFailureCall());
-        threeThousand.error(failBecauseOfUnexpectedFailureCall());
+    private void expectErrorFrom(String input, BiConsumer<String, InvalidParameterFailure> resultConsumer) {
+        ParameterParsingResult result = SingleParameterParser.parse(input);
+
+        result.error(resultConsumer);
+
+        result.romanNumber(failBecauseOfUnexpectedRomanNumberCall());
+        result.success(failBecauseOfUnexpectedSuccessCall());
+    }
+
+    private void expectArabicNumberFrom(String input, BiConsumer<String, ArabicNumber> resultConsumer) {
+        ParameterParsingResult result = SingleParameterParser.parse(input);
+
+        result.success(resultConsumer);
+
+        result.romanNumber(failBecauseOfUnexpectedRomanNumberCall());
+        result.error(failBecauseOfUnexpectedFailureCall());
+    }
+
+    private void expectRomanValueFrom(String input, BiConsumer<String, String> resultConsumer) {
+        ParameterParsingResult result = SingleParameterParser.parse(input);
+
+        result.romanNumber(resultConsumer);
+
+        result.success(failBecauseOfUnexpectedSuccessCall());
+        result.error(failBecauseOfUnexpectedFailureCall());
+    }
+
+    private BiConsumer<String, String> failBecauseOfUnexpectedRomanNumberCall() {
+        return (input, error) -> fail("Error should not have been called");
     }
 
     private BiConsumer<String, InvalidParameterFailure> failBecauseOfUnexpectedFailureCall() {

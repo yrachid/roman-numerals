@@ -30,4 +30,21 @@ public class NumberConverterFunctionalTest {
         assertThat(output.get(7), equalTo("0\t:\tInvalid input: Arabic numerals smaller than 1 are not supported"));
         assertThat(output.get(8), equalTo("3001\t:\tInvalid input: Arabic numerals greater than 3000 are not supported"));
     }
+
+    @Test
+    public void converts_romans_to_arabics_as_well() {
+        List<String> output = new ArrayList<>();
+
+        new Application(output::add).run(new String[]{
+                "I", "XLIX", "CCC", "MMCCCXXXIII"
+        });
+
+        assertThat(output.get(0), equalTo(""));
+        assertThat(output.get(1), equalTo("Received Args: [I, XLIX, CCC, MMCCCXXXIII]"));
+        assertThat(output.get(2), equalTo(""));
+        assertThat(output.get(3), equalTo("I\t:\tI"));
+        assertThat(output.get(4), equalTo("XLIX\t:\tXLIX"));
+        assertThat(output.get(5), equalTo("CCC\t:\tCCC"));
+        assertThat(output.get(6), equalTo("MMCCCXXXIII\t:\tMMCCCXXXIII"));
+    }
 }
