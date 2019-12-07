@@ -1,11 +1,13 @@
 package com.yrachid.roman.input;
 
 import com.yrachid.roman.numerals.ArabicNumber;
+import com.yrachid.roman.numerals.RomanNumber;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import java.util.function.BiConsumer;
 
+import static com.yrachid.roman.numerals.RomanNumeral.I;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -64,12 +66,12 @@ public class SingleParameterParserTest {
     public void succeeds_with_roman_numeral_input() {
         expectRomanValueFrom("I", (input, value) -> {
             assertThat(input, equalTo("I"));
-            assertThat(value, equalTo("I"));
+            assertThat(value, equalTo(RomanNumber.of(I)));
         });
 
         expectRomanValueFrom("II", (input, value) -> {
             assertThat(input, equalTo("II"));
-            assertThat(value, equalTo("II"));
+            assertThat(value, equalTo(RomanNumber.of(I, I)));
         });
     }
 
@@ -104,7 +106,7 @@ public class SingleParameterParserTest {
         result.error(failBecauseOfUnexpectedFailureCall());
     }
 
-    private void expectRomanValueFrom(String input, BiConsumer<String, String> resultConsumer) {
+    private void expectRomanValueFrom(String input, BiConsumer<String, RomanNumber> resultConsumer) {
         ParameterParsingResult result = SingleParameterParser.parse(input);
 
         result.romanNumber(resultConsumer);
@@ -113,7 +115,7 @@ public class SingleParameterParserTest {
         result.error(failBecauseOfUnexpectedFailureCall());
     }
 
-    private BiConsumer<String, String> failBecauseOfUnexpectedRomanNumberCall() {
+    private BiConsumer<String, RomanNumber> failBecauseOfUnexpectedRomanNumberCall() {
         return (input, error) -> fail("Error should not have been called");
     }
 

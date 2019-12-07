@@ -1,5 +1,5 @@
 
-- [ ] Extrair operacoes de RomanNumber para uma classe RomanArithmetic?
+- [ ] Renomear ParsingResult::sucess -> arabicNumber
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral
@@ -22,3 +22,4 @@
   - [X] Criar task JavaExec
   - [X] gradle -P
 - [X] Criar git tag para identificar quando uma parte do desafio estiver finalizada
+- [X] Extrair operacoes de RomanNumber para uma classe RomanArithmetic?

@@ -14,7 +14,11 @@ public class SingleParameterParser {
         }
 
         if (param.matches(ROMAN_NUMBER_PATTERN)) {
-            return ParameterParsingResult.success(param, param);
+            try {
+                return ParameterParsingResult.success(param, RomanNumberParser.parse(param));
+            } catch (IllegalArgumentException exception) {
+                return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(exception.getMessage()));
+            }
         }
 
         if (param.matches(ARABIC_NUMBER_PATTERN)) {

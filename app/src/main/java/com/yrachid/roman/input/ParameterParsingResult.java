@@ -1,6 +1,7 @@
 package com.yrachid.roman.input;
 
 import com.yrachid.roman.numerals.ArabicNumber;
+import com.yrachid.roman.numerals.RomanNumber;
 
 import java.util.function.BiConsumer;
 
@@ -9,20 +10,20 @@ public final class ParameterParsingResult {
     private final String rawInput;
     private final ArabicNumber arabicNumber;
     private final InvalidParameterFailure invalidParameter;
-    private String roman;
+    private final RomanNumber romanNumber;
 
-    private ParameterParsingResult(String rawInput, ArabicNumber arabicNumber, InvalidParameterFailure invalidParameter, String roman) {
+    private ParameterParsingResult(String rawInput, ArabicNumber arabicNumber, InvalidParameterFailure invalidParameter, RomanNumber romanNumber) {
         this.rawInput = rawInput;
         this.arabicNumber = arabicNumber;
         this.invalidParameter = invalidParameter;
-        this.roman = roman;
+        this.romanNumber = romanNumber;
     }
 
     private ParameterParsingResult(String rawInput, ArabicNumber arabicNumber) {
         this(rawInput, arabicNumber, null, null);
     }
 
-    private ParameterParsingResult(String rawInput, String roman) {
+    private ParameterParsingResult(String rawInput, RomanNumber roman) {
         this(rawInput, null, null, roman);
     }
 
@@ -30,8 +31,8 @@ public final class ParameterParsingResult {
         this(rawInput, null, failure, null);
     }
 
-    static ParameterParsingResult success(String rawInput, String number) {
-        return new ParameterParsingResult(rawInput, number);
+    static ParameterParsingResult success(String rawInput, RomanNumber romanNumber) {
+        return new ParameterParsingResult(rawInput, romanNumber);
     }
 
     static ParameterParsingResult success(String rawInput, ArabicNumber number) {
@@ -54,9 +55,9 @@ public final class ParameterParsingResult {
         }
     }
 
-    public void romanNumber(BiConsumer<String, String> callback) {
-        if (roman != null) {
-            callback.accept(rawInput, roman);
+    public void romanNumber(BiConsumer<String, RomanNumber> callback) {
+        if (romanNumber != null) {
+            callback.accept(rawInput, romanNumber);
         }
     }
 }
