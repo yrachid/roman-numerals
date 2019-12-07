@@ -27,14 +27,14 @@ public final class RomanNumber {
                 .collect(toList()));
     }
 
-    static RomanNumber concat(RomanNumeral numeral, RomanNumber romanNumber) {
+    public static RomanNumber concat(RomanNumeral numeral, RomanNumber romanNumber) {
         List<RomanNumeral> concatenatedNumerals = Stream.concat(Stream.of(numeral), romanNumber.numerals.stream())
                 .collect(toList());
 
         return new RomanNumber(concatenatedNumerals);
     }
 
-    static RomanNumber of(RomanNumeral... numerals) {
+    public static RomanNumber of(RomanNumeral... numerals) {
         return new RomanNumber(new ArrayList<>(asList(numerals)));
     }
 

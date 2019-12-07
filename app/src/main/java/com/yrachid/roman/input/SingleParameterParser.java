@@ -5,7 +5,7 @@ import com.yrachid.roman.numerals.ArabicNumber;
 public class SingleParameterParser {
 
     private static final String ARABIC_NUMBER_PATTERN = "\\d{1,4}";
-    private static final String ROMAN_NUMBER_PATTERN = "[IVXLCDM]{1,11}";
+    static final String ROMAN_NUMBER_PATTERN = "[IVXLCDM]{1,11}";
 
     public static ParameterParsingResult parse(String param) {
 
