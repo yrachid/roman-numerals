@@ -1,5 +1,6 @@
 
 - [ ] Renomear ParsingResult::sucess -> arabicNumber
+- [ ] Não devem existir numeros romanos vazios
 - [X] Criar classe ArabicValue?
 - [X] Testes manuais com Docker
 - [X] Renomear: CompoundRomanNumeral

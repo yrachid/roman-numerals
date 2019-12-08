@@ -65,3 +65,15 @@ Intencioalmente. Um objeto nao pode ser construido com um estado invalido, indep
 
 ```
 
+```java
+        Stream.of(args)
+                .map(SingleParameterParser::parse)
+                .map(NumberConversion::execute)
+                .forEach(conversion -> {
+
+                    conversion.error(this::printFormattedOutput);
+
+                    conversion.result(this::printFormattedOutput);
+                });
+
+```

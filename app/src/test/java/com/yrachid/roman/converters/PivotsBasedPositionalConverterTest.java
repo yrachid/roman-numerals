@@ -9,13 +9,6 @@ import static org.junit.Assert.assertThat;
 public class PivotsBasedPositionalConverterTest {
 
     @Test
-    public void returns_empty_when_value_is_zero_regardless_of_pivoting_strategy() {
-        assertThat(PivotBasedPositionalConverter.pivoting(Pivots.UNIT).convert(0), equalTo(RomanNumber.empty()));
-        assertThat(PivotBasedPositionalConverter.pivoting(Pivots.TENS).convert(0), equalTo(RomanNumber.empty()));
-        assertThat(PivotBasedPositionalConverter.pivoting(Pivots.HUNDRED).convert(0), equalTo(RomanNumber.empty()));
-    }
-
-    @Test
     public void converts_units_using_the_units_pivot() {
 
         PivotBasedPositionalConverter pivotConverter = PivotBasedPositionalConverter.pivoting(Pivots.UNIT);

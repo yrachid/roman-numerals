@@ -13,6 +13,7 @@ public class SingleParameterParser {
             return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage("Input is empty"));
         }
 
+//       TODO: Seria possivel remover esta duplicacao com polimorfismo?
         if (param.matches(ROMAN_NUMBER_PATTERN)) {
             try {
                 return ParameterParsingResult.success(param, RomanNumberParser.parse(param));
@@ -31,6 +32,7 @@ public class SingleParameterParser {
             }
         }
 
+//        TODO: Alterar mensagem para incluir "roman number"
         return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(String.format(
                 "Input must be an integer number. It must also not be greater than %d",
                 ArabicNumber.MAX_VALUE.intValue()

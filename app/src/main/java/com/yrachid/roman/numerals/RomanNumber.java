@@ -1,23 +1,22 @@
 package com.yrachid.roman.numerals;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
 public final class RomanNumber {
 
-    private static final RomanNumber EMPTY = new RomanNumber(emptyList());
-
     private final List<RomanNumeral> numerals;
 
     private RomanNumber(List<RomanNumeral> numerals) {
+        if (numerals == null || numerals.isEmpty()) {
+            throw new IllegalArgumentException("A roman number must have at least one numeral");
+        }
+
         this.numerals = numerals;
     }
 
@@ -34,12 +33,13 @@ public final class RomanNumber {
         return new RomanNumber(concatenatedNumerals);
     }
 
-    public static RomanNumber of(RomanNumeral... numerals) {
-        return new RomanNumber(new ArrayList<>(asList(numerals)));
-    }
-
-    public static RomanNumber empty() {
-        return EMPTY;
+    public static RomanNumber of(RomanNumeral numeral, RomanNumeral... numerals) {
+        return new RomanNumber(
+                Stream.concat(
+                        Stream.of(numeral),
+                        Stream.of(numerals)
+                ).collect(toList())
+        );
     }
 
     public RomanNumber concat(RomanNumber other) {

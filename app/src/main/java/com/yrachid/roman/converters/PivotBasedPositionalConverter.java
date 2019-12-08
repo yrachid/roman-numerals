@@ -14,10 +14,6 @@ public class PivotBasedPositionalConverter {
 
     public RomanNumber convert(int unit) {
 
-        if (unit == 0) {
-            return RomanNumber.empty();
-        }
-
         if (pivots.isBetweenLeftAndMiddlePredecessor(unit)) {
             return pivots.left().repeat(pivots.repetitionStrategy().apply(unit));
         }

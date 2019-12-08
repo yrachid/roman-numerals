@@ -19,8 +19,8 @@ public enum RomanNumeral {
         return value;
     }
 
-    public static RomanNumber compose(RomanNumeral... numerals) {
-        return RomanNumber.of(numerals);
+    public static RomanNumber compose(RomanNumeral numeral, RomanNumeral... numerals) {
+        return RomanNumber.of(numeral, numerals);
     }
 
     public RomanNumber repeat(int iterations) {

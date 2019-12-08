@@ -3,6 +3,9 @@ package com.yrachid.roman.converters;
 import com.yrachid.roman.numerals.ArabicNumber;
 import com.yrachid.roman.numerals.RomanNumber;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import static com.yrachid.roman.converters.PivotBasedPositionalConverter.pivoting;
 import static com.yrachid.roman.converters.Pivots.HUNDRED;
 import static com.yrachid.roman.converters.Pivots.TENS;
@@ -13,14 +16,24 @@ public class ArabicToRomanNumberConverter {
 
     public static RomanNumber convert(ArabicNumber arabicNumber) {
 
-        RomanNumber thousand = M.repeat(arabicNumber.thousand());
-        RomanNumber hundred = pivoting(HUNDRED).convert(arabicNumber.hundred() * 100);
-        RomanNumber tens = pivoting(TENS).convert(arabicNumber.tens() * 10);
-        RomanNumber unit = pivoting(UNIT).convert(arabicNumber.unit());
+        Optional<RomanNumber> thousand = arabicNumber.thousand() > 0
+                ? Optional.of(M.repeat(arabicNumber.thousand()))
+                : Optional.empty();
 
-        return thousand
-                .concat(hundred)
-                .concat(tens)
-                .concat(unit);
+        Optional<RomanNumber> hundred = convertIfPositionIsNotZeroed(HUNDRED, arabicNumber.hundred() * 100);
+        Optional<RomanNumber> tens = convertIfPositionIsNotZeroed(TENS, arabicNumber.tens() * 10);
+        Optional<RomanNumber> unit = convertIfPositionIsNotZeroed(UNIT, arabicNumber.unit());
+
+        return Stream.of(thousand, hundred, tens, unit)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .reduce(RomanNumber::concat)
+                .orElseThrow(() -> new IllegalStateException("The roman system does not support zero"));
+    }
+
+    private static Optional<RomanNumber> convertIfPositionIsNotZeroed(Pivots pivots, int value) {
+        return value > 0
+                ? Optional.of(pivoting(pivots).convert(value))
+                : Optional.empty();
     }
 }
