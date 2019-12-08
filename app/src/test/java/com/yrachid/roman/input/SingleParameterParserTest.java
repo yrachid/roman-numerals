@@ -7,7 +7,13 @@ import org.junit.Test;
 
 import java.util.function.BiConsumer;
 
+import static com.yrachid.roman.numerals.RomanNumeral.C;
+import static com.yrachid.roman.numerals.RomanNumeral.D;
 import static com.yrachid.roman.numerals.RomanNumeral.I;
+import static com.yrachid.roman.numerals.RomanNumeral.L;
+import static com.yrachid.roman.numerals.RomanNumeral.M;
+import static com.yrachid.roman.numerals.RomanNumeral.V;
+import static com.yrachid.roman.numerals.RomanNumeral.X;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -73,6 +79,20 @@ public class SingleParameterParserTest {
             assertThat(input, equalTo("II"));
             assertThat(value, equalTo(RomanNumber.of(I, I)));
         });
+
+        expectRomanValueFrom("MMDCCCLXXXVIII", (input, value) -> {
+            assertThat(input, equalTo("MMDCCCLXXXVIII"));
+            assertThat(value, equalTo(RomanNumber.of(M, M, D, C, C, C, L, X, X, X, V, I, I, I)));
+        });
+    }
+
+    @Test
+    public void fails_when_roman_input_is_too_big() {
+        expectErrorFrom("MMMDCCCLXXXVIII", (input, error) -> {
+            assertThat(input, equalTo("MMMDCCCLXXXVIII"));
+            assertThat(error.toString(), hasCause("Input must be an integer number. It must also not be greater than 3000"));
+        });
+
     }
 
     @Test
