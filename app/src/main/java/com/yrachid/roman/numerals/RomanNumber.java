@@ -50,6 +50,10 @@ public final class RomanNumber {
         return new RomanNumber(newNumerals);
     }
 
+    public List<RomanNumeral> numerals() {
+        return numerals;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

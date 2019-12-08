@@ -61,6 +61,11 @@ public class ArabicNumber {
         return Arrays.hashCode(positionalValues);
     }
 
+    @Override
+    public String toString() {
+        return join("", positionalValues);
+    }
+
     public static ArabicNumber of(int value) {
 
         if (value > ArabicNumber.MAX_VALUE.intValue()) {
