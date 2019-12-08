@@ -2,9 +2,11 @@ package com.yrachid.roman.converters;
 
 import com.yrachid.roman.numerals.ArabicNumber;
 import com.yrachid.roman.numerals.RomanNumber;
+import com.yrachid.roman.numerals.RomanNumeral;
 import org.junit.Test;
 
 import static com.yrachid.roman.numerals.RomanNumeral.C;
+import static com.yrachid.roman.numerals.RomanNumeral.D;
 import static com.yrachid.roman.numerals.RomanNumeral.I;
 import static com.yrachid.roman.numerals.RomanNumeral.L;
 import static com.yrachid.roman.numerals.RomanNumeral.M;
@@ -38,33 +40,29 @@ public class RomanToArabicNumberConverterTest {
 
     @Test
     public void converts_numbers_with_odd_sizes() {
-        ArabicNumber threeThousand = RomanToArabicNumberConverter.convert(RomanNumber.of(M, M, M));
-        ArabicNumber seventyNine = RomanToArabicNumberConverter.convert(RomanNumber.of(L, X, X, I, X));
-
-        assertThat(threeThousand, equalTo(ArabicNumber.of(3000)));
-        assertThat(seventyNine, equalTo(ArabicNumber.of(79)));
+        assertThat(conversionOf(M, C, M), equalTo(1900));
+        assertThat(conversionOf(M, D, C, C, L, X, X, I, X), equalTo(1779));
+        assertThat(conversionOf(M, M, M), equalTo(3000));
+        assertThat(conversionOf(L, X, X, I, X), equalTo(79));
+        assertThat(conversionOf(C, M, L, I, X), equalTo(959));
+        assertThat(conversionOf(M, C, M, L, X), equalTo(1960));
     }
 
     @Test
     public void converts_numbers_with_even_sizes() {
-        ArabicNumber twentyEleven = RomanToArabicNumberConverter.convert(RomanNumber.of(M, M, X, I));
-        ArabicNumber nineteenSeventyNine = RomanToArabicNumberConverter.convert(RomanNumber.of(M, C, M, L, X, X, I, X));
-
-//        (
-//                M, C, -> 1100
-//                M, L, -> 1050
-//                X, X, -> 20
-//                I, X -> 9
-//        );
-
-        assertThat(twentyEleven, equalTo(ArabicNumber.of(2011)));
-        assertThat(nineteenSeventyNine, equalTo(1979));
+        assertThat(conversionOf(M, M, I, X), equalTo(2009));
+        assertThat(conversionOf(M, M, X, I), equalTo(2011));
+        assertThat(conversionOf(M, C, M, L), equalTo(1950));
+        assertThat(conversionOf(M, C, M, L, I, X), equalTo(1959));
+        assertThat(conversionOf(M, C, M, L, X, X, I, X), equalTo(1979));
     }
 
     @Test
     public void converts_a_large_number() {
-        ArabicNumber four = RomanToArabicNumberConverter.convert(RomanNumber.of(M, M, C, C, C, X, X, X, I, I, I));
+        assertThat(conversionOf(M, M, C, C, C, X, X, X, I, I, I), equalTo(2333));
+    }
 
-        assertThat(four, equalTo(ArabicNumber.of(2333)));
+    public int conversionOf(RomanNumeral numeral, RomanNumeral... numerals) {
+        return RomanToArabicNumberConverter.convert(RomanNumber.of(numeral, numerals)).intValue();
     }
 }

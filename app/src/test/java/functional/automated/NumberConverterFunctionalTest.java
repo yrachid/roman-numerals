@@ -42,9 +42,9 @@ public class NumberConverterFunctionalTest {
         assertThat(output.get(0), equalTo(""));
         assertThat(output.get(1), equalTo("Received Args: [I, XLIX, CCC, MMCCCXXXIII]"));
         assertThat(output.get(2), equalTo(""));
-        assertThat(output.get(3), equalTo("I\t:\tI"));
-        assertThat(output.get(4), equalTo("XLIX\t:\tXLIX"));
-        assertThat(output.get(5), equalTo("CCC\t:\tCCC"));
-        assertThat(output.get(6), equalTo("MMCCCXXXIII\t:\tMMCCCXXXIII"));
+        assertThat(output.get(3), equalTo("I\t:\t0001"));
+        assertThat(output.get(4), equalTo("XLIX\t:\t0049"));
+        assertThat(output.get(5), equalTo("CCC\t:\t0300"));
+        assertThat(output.get(6), equalTo("MMCCCXXXIII\t:\t2333"));
     }
 }

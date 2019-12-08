@@ -31,11 +31,11 @@ public final class ParameterParsingResult {
         this(rawInput, null, failure, null);
     }
 
-    static ParameterParsingResult success(String rawInput, RomanNumber romanNumber) {
+    static ParameterParsingResult romanNumber(String rawInput, RomanNumber romanNumber) {
         return new ParameterParsingResult(rawInput, romanNumber);
     }
 
-    static ParameterParsingResult success(String rawInput, ArabicNumber number) {
+    static ParameterParsingResult arabicNumber(String rawInput, ArabicNumber number) {
         return new ParameterParsingResult(rawInput, number);
     }
 
@@ -49,7 +49,7 @@ public final class ParameterParsingResult {
         }
     }
 
-    public void success(BiConsumer<String, ArabicNumber> callback) {
+    public void arabicNumber(BiConsumer<String, ArabicNumber> callback) {
         if (arabicNumber != null) {
             callback.accept(rawInput, arabicNumber);
         }

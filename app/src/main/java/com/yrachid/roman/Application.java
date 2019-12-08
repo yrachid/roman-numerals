@@ -1,6 +1,7 @@
 package com.yrachid.roman;
 
 import com.yrachid.roman.converters.ArabicToRomanNumberConverter;
+import com.yrachid.roman.converters.RomanToArabicNumberConverter;
 import com.yrachid.roman.input.SingleParameterParser;
 
 import java.util.Arrays;
@@ -26,9 +27,10 @@ public class Application {
 
                     result.error(this::printFormattedOutput);
 
-                    result.romanNumber(this::printFormattedOutput);
+                    result.romanNumber((input, success) ->
+                            printFormattedOutput(input, RomanToArabicNumberConverter.convert(success)));
 
-                    result.success((input, success) ->
+                    result.arabicNumber((input, success) ->
                             printFormattedOutput(input, ArabicToRomanNumberConverter.convert(success)));
                 });
     }

@@ -16,7 +16,7 @@ public class SingleParameterParser {
 //       TODO: Seria possivel remover esta duplicacao com polimorfismo?
         if (param.matches(ROMAN_NUMBER_PATTERN)) {
             try {
-                return ParameterParsingResult.success(param, RomanNumberParser.parse(param));
+                return ParameterParsingResult.romanNumber(param, RomanNumberParser.parse(param));
             } catch (IllegalArgumentException exception) {
                 return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(exception.getMessage()));
             }
@@ -26,7 +26,7 @@ public class SingleParameterParser {
             try {
                 int inputAsInt = Integer.parseInt(param);
 
-                return ParameterParsingResult.success(param, ArabicNumber.of(inputAsInt));
+                return ParameterParsingResult.arabicNumber(param, ArabicNumber.of(inputAsInt));
             } catch (IllegalArgumentException exception) {
                 return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(exception.getMessage()));
             }

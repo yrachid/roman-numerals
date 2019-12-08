@@ -94,13 +94,13 @@ public class SingleParameterParserTest {
         result.error(resultConsumer);
 
         result.romanNumber(failBecauseOfUnexpectedRomanNumberCall());
-        result.success(failBecauseOfUnexpectedSuccessCall());
+        result.arabicNumber(failBecauseOfUnexpectedSuccessCall());
     }
 
     private void expectArabicNumberFrom(String input, BiConsumer<String, ArabicNumber> resultConsumer) {
         ParameterParsingResult result = SingleParameterParser.parse(input);
 
-        result.success(resultConsumer);
+        result.arabicNumber(resultConsumer);
 
         result.romanNumber(failBecauseOfUnexpectedRomanNumberCall());
         result.error(failBecauseOfUnexpectedFailureCall());
@@ -111,7 +111,7 @@ public class SingleParameterParserTest {
 
         result.romanNumber(resultConsumer);
 
-        result.success(failBecauseOfUnexpectedSuccessCall());
+        result.arabicNumber(failBecauseOfUnexpectedSuccessCall());
         result.error(failBecauseOfUnexpectedFailureCall());
     }
 

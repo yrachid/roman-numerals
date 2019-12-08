@@ -2,11 +2,11 @@ package com.yrachid.roman.numerals;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.IntStream.rangeClosed;
 
 public final class RomanNumber {
 
@@ -21,16 +21,20 @@ public final class RomanNumber {
     }
 
     static RomanNumber repeating(RomanNumeral numeral, int times) {
-        return new RomanNumber(rangeClosed(1, times)
-                .mapToObj(idx -> numeral)
-                .collect(toList()));
+        return new RomanNumber(
+                IntStream.rangeClosed(1, times)
+                        .mapToObj(idx -> numeral)
+                        .collect(toList())
+        );
     }
 
     public static RomanNumber concat(RomanNumeral numeral, RomanNumber romanNumber) {
-        List<RomanNumeral> concatenatedNumerals = Stream.concat(Stream.of(numeral), romanNumber.numerals.stream())
-                .collect(toList());
-
-        return new RomanNumber(concatenatedNumerals);
+        return new RomanNumber(
+                Stream.concat(
+                        Stream.of(numeral),
+                        romanNumber.numerals.stream()
+                ).collect(toList())
+        );
     }
 
     public static RomanNumber of(RomanNumeral numeral, RomanNumeral... numerals) {
@@ -43,11 +47,12 @@ public final class RomanNumber {
     }
 
     public RomanNumber concat(RomanNumber other) {
-        List<RomanNumeral> newNumerals = Stream
-                .concat(numerals.stream(), other.numerals.stream())
-                .collect(toList());
-
-        return new RomanNumber(newNumerals);
+        return new RomanNumber(
+                Stream.concat(
+                        numerals.stream(),
+                        other.numerals.stream()
+                ).collect(toList())
+        );
     }
 
     public List<RomanNumeral> numerals() {
