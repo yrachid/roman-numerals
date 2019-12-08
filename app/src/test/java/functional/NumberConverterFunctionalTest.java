@@ -1,4 +1,4 @@
-package functional.automated;
+package functional;
 
 import com.yrachid.roman.Application;
 import org.junit.Test;

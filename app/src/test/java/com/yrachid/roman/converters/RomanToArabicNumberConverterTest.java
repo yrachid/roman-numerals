@@ -3,6 +3,7 @@ package com.yrachid.roman.converters;
 import com.yrachid.roman.numerals.ArabicNumber;
 import com.yrachid.roman.numerals.RomanNumber;
 import com.yrachid.roman.numerals.RomanNumeral;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static com.yrachid.roman.numerals.RomanNumeral.C;
@@ -55,6 +56,15 @@ public class RomanToArabicNumberConverterTest {
         assertThat(conversionOf(M, C, M, L), equalTo(1950));
         assertThat(conversionOf(M, C, M, L, I, X), equalTo(1959));
         assertThat(conversionOf(M, C, M, L, X, X, I, X), equalTo(1979));
+    }
+
+    @Test
+    @Ignore
+    public void converts_2991() {
+        assertThat(conversionOf(C, X, L, I), equalTo(141));
+        assertThat(conversionOf(C, X, L, I, I, I), equalTo(143));
+        assertThat(conversionOf(M, M, C, M, X, C, I), equalTo(2991));
+        assertThat(conversionOf(M, M, D, C, C, C, X, C, I), equalTo(2891));
     }
 
     @Test

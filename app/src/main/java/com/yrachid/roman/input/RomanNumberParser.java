@@ -9,7 +9,7 @@ import static com.yrachid.roman.input.SingleParameterParser.ROMAN_NUMBER_PATTERN
 
 public class RomanNumberParser {
 
-    static RomanNumber parse(String value) {
+    public static RomanNumber parse(String value) {
         if (value == null) {
             throw new IllegalArgumentException("Failed to parse roman number from null");
         }

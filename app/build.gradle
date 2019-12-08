@@ -25,9 +25,9 @@ dependencies {
 }
 
 test {
-    exclude "**/functional/automated/**"
+    exclude "**/functional/**"
 }
 
 task functionalTest(type: Test) {
-    include "**/functional/automated/**"
+    include "**/functional/**"
 }
