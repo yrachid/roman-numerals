@@ -11,25 +11,34 @@ Enunciado do problema http://codingdojo.org/kata/RomanNumerals/
 
 ### Executando testes
 
-Testes unitários:
+__Testes unitários:__
 
 ```bash
 ./gradlew test functionalTest
 ```
 
-Testes funcionais:
+__Testes funcionais:__
 
 ```bash
 ./gradlew functionalTest
 ```
 
-Teste de conversão romano -> arábico:
+__Teste de conversão romano -> arábico:__
 
-Este teste converte todos os valores romanos (do 1 ao 3000), identificando
-erros de conversão. 
+Este teste converte todos os valores romanos (do 1 ao 3000), identificando erros de conversão.
 
 ```bash
 ./gradlew convertAllRomanNumbersTest
+```
+
+__Teste de conversão arábico -> romano:__
+
+Este teste é "semi-automatizado", dado que ele não verifica se os resultados das operações estão corretos:
+
+```bash
+./scripts/arabic-to-roman.sh
+
+./scripts/docker-arabic-to-roman.sh
 ```
 
 
@@ -48,7 +57,7 @@ Caso nenhum parâmetro seja passado aos scripts, eles utilizarão os valores pr�
 ./scripts/docker-build-and-run.sh
 
 # Utilizando valores especificados
-./scripts/docker-build-and-run.sh 1 10 20 1999 2000
+./scripts/docker-build-and-run.sh 1 10 20 1999 2000 X MCM XXVIII
 ```
 
 Para executar com Docker sem o script:
@@ -56,7 +65,7 @@ Para executar com Docker sem o script:
 ```bash
 docker build -t number-converter .
 
-docker run number-converter app.jar 1 10 20 1999 2000
+docker run number-converter app.jar 1 10 20 1999 2000 X MCM XXVIII
 ```
 
 #### Jar
@@ -68,7 +77,7 @@ De maneira similar à execução com Docker, basta utilizar o script:
 ./scripts/build-and-run.sh
 
 # Utilizando valores especificados
-./scripts/build-and-run.sh 1 10 20 1999 2000
+./scripts/build-and-run.sh 1 10 20 1999 2000 X MCM XXVIII
 ```
 
 Para executar sem o script:
@@ -77,7 +86,7 @@ Para executar sem o script:
 
 ./gradlew clean build
 
-java -jar app/build/libs/*.jar 1 10 20 1999 2000
+java -jar app/build/libs/*.jar 1 10 20 1999 2000 X MCM XXVIII
 ```
 
 ## Decisões de implementação
@@ -94,7 +103,7 @@ executar:
 git log
 ```
 
-### Lógica de conversão
+### Lógica de conversão arábico -> romano
 
 A lógica de conversão consiste em converter cada posição do número arábico invidividualmente, concatenando os resultados:
 
@@ -116,6 +125,57 @@ de modo que uma conversão direta não se faz possível.
 
 A classe `PivotBasedPositionalConverter` utiliza uma lógica de "pivôs" que conseguem traduzir essa diferença posicional entre um sistema e
 outro, independente da magnitude do valor.
+
+### Lógica de conversão romano -> arábico
+
+Inicialmente, tentei implementar um algoritmo que percorresse os algarismos de dois em dois, somando-os ou subtraindo-os de acordo com a
+convenção romana. Entretanto, este algoritmo não funciona dependendo do número (ele falhou em 360 das 3000 conversões).
+
+A solução final foi calcular separadamente os algarismos que devem ser somados dos que devem ser subtraídos, evitando uma má interpretação
+das posições dos algarismos (como aconteceu na primeira tentativa). O pseudo-código abaixo é implementado pela classe
+`RomanToArabicNumberConverter`:
+
+```python
+
+def converter():
+  valor_romano = [M, M, C, D, X, L, I, V]
+
+  '''
+    Encontra oos pares que devem ser subtraídos, armazenando
+    tambem os seus indices, para que eles possam ser ignorados
+    pela outra metade do algoritmo que soma os demais valores:
+    {
+      "indices": [2, 3, 4, 5, 6, 7],
+      "algarismos":  [C, D, X, L, I, V]
+    }
+  '''
+
+  pares_de_subtracao = encontra_pares_de_subtracao()
+
+  '''
+    Demais algarismos que nao foram selecionados pela funcao anterior. Basicamente, todos os algarismos cujos indices
+    nao pertencem a pares_de_subtracao.indices. Neste caso:
+    [M, M]
+  '''
+  algarismos_de_soma = encontra_pares_de_soma(pares_de_subtracao)
+
+  subtotal_subtracao = (
+
+    # Soma os resultados das subtracoes
+    somar_resultados(
+
+      '''
+        Subtrai algarismo_direita - algarismo_esquerda,
+        gerando uma nova lista com os resultados
+      '''
+      subtrair_pares(pares_de_subtracao)
+    )
+  )
+
+  subtotal_soma = somar(algarismos_de_soma)
+
+  return subtotal_subtracao + subtotal_soma
+```
 
 ### InvalidParameterFailure
 
@@ -152,16 +212,20 @@ Independentemente da maneira como a aplicação é executada, para uma entrada `
 
 ```bash
 
-./scripts/build-and-run.sh 1 10 20 lizard
+./scripts/build-and-run.sh 1 10 20 1999 2000 X MCM XVIII
 
 # Saidas do Gradle e/ou Docker ...
 
-Received args: [1, 10, 20]
+Received Args: [1, 10, 20, 1999, 2000, X, MCM, XXVIII]
 
-1       : I
-10      : X
-20      : XX
-lizard  : Invalid Input: input must be an integer number.
+1       :       I
+10      :       X
+20      :       XX
+1999    :       MCMXCIX
+2000    :       MM
+X       :       0010
+MCM     :       1900
+XXVIII  :       0028
 ```
 
 ### Conversão

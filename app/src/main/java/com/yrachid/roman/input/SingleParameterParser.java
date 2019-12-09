@@ -2,6 +2,8 @@ package com.yrachid.roman.input;
 
 import com.yrachid.roman.numerals.ArabicNumber;
 
+import static com.yrachid.roman.input.InvalidParameterFailure.withMessage;
+
 public class SingleParameterParser {
 
     private static final String ARABIC_NUMBER_PATTERN = "\\d{1,4}";
@@ -10,7 +12,7 @@ public class SingleParameterParser {
     public static ParameterParsingResult parse(String param) {
 
         if (param == null || param.trim().isEmpty()) {
-            return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage("Input is empty"));
+            return ParameterParsingResult.failure(param, withMessage("Input is empty"));
         }
 
 //       TODO: Seria possivel remover esta duplicacao com polimorfismo?
@@ -18,7 +20,7 @@ public class SingleParameterParser {
             try {
                 return ParameterParsingResult.romanNumber(param, RomanNumberParser.parse(param));
             } catch (IllegalArgumentException exception) {
-                return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(exception.getMessage()));
+                return ParameterParsingResult.failure(param, withMessage(exception.getMessage()));
             }
         }
 
@@ -28,14 +30,15 @@ public class SingleParameterParser {
 
                 return ParameterParsingResult.arabicNumber(param, ArabicNumber.of(inputAsInt));
             } catch (IllegalArgumentException exception) {
-                return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(exception.getMessage()));
+                return ParameterParsingResult.failure(param, withMessage(exception.getMessage()));
             }
         }
 
-//        TODO: Alterar mensagem para incluir "roman number"
-        return ParameterParsingResult.failure(param, InvalidParameterFailure.withMessage(String.format(
-                "Input must be an integer number. It must also not be greater than %d",
-                ArabicNumber.MAX_VALUE.intValue()
-        )));
+        return ParameterParsingResult.failure(param, withMessage(
+                String.format("Input must be an integer number within [%s, %s] or a roman number",
+                        ArabicNumber.MIN_VALUE,
+                        ArabicNumber.MAX_VALUE
+                )
+        ));
     }
 }

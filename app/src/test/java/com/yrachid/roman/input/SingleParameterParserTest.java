@@ -48,7 +48,7 @@ public class SingleParameterParserTest {
     public void fails_with_non_numeric_input() {
         expectErrorFrom("A", (input, error) -> {
             assertThat(input, equalTo("A"));
-            assertThat(error.toString(), hasCause("Input must be an integer number. It must also not be greater than 3000"));
+            assertThat(error.toString(), hasCause("Input must be an integer number within [0001, 3000] or a roman number"));
         });
     }
 
@@ -56,7 +56,7 @@ public class SingleParameterParserTest {
     public void fails_with_numbers_beyond_maximum_allowed_value() {
         expectErrorFrom("10000000000000000000000000000000000000000000", (input, error) -> {
             assertThat(input, equalTo("10000000000000000000000000000000000000000000"));
-            assertThat(error.toString(), hasCause("Input must be an integer number. It must also not be greater than 3000"));
+            assertThat(error.toString(), hasCause("Input must be an integer number within [0001, 3000] or a roman number"));
         });
     }
 
@@ -90,7 +90,7 @@ public class SingleParameterParserTest {
     public void fails_when_roman_input_is_too_big() {
         expectErrorFrom("MMMDCCCLXXXVIII", (input, error) -> {
             assertThat(input, equalTo("MMMDCCCLXXXVIII"));
-            assertThat(error.toString(), hasCause("Input must be an integer number. It must also not be greater than 3000"));
+            assertThat(error.toString(), hasCause("Input must be an integer number within [0001, 3000] or a roman number"));
         });
 
     }

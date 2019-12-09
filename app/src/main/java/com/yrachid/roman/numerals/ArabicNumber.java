@@ -16,7 +16,7 @@ public class ArabicNumber {
     private static final int THOUSAND_POSITION = 0;
 
     public static final ArabicNumber MAX_VALUE = new ArabicNumber(new String[]{"3", "0", "0", "0"});
-    private static final ArabicNumber MIN_VALUE = new ArabicNumber(new String[]{"0", "0", "0", "1"});
+    public static final ArabicNumber MIN_VALUE = new ArabicNumber(new String[]{"0", "0", "0", "1"});
 
     private final String[] positionalValues;
 

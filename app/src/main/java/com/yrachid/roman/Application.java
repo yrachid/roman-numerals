@@ -27,15 +27,15 @@ public class Application {
 
                     result.error(this::printFormattedOutput);
 
-                    result.romanNumber((input, success) ->
-                            printFormattedOutput(input, RomanToArabicNumberConverter.convert(success)));
+                    result.romanNumber((input, number) ->
+                            printFormattedOutput(input, RomanToArabicNumberConverter.convert(number)));
 
-                    result.arabicNumber((input, success) ->
-                            printFormattedOutput(input, ArabicToRomanNumberConverter.convert(success)));
+                    result.arabicNumber((input, number) ->
+                            printFormattedOutput(input, ArabicToRomanNumberConverter.convert(number)));
                 });
     }
 
-    private void printFormattedOutput(String input, Object err) {
-        output.accept(String.format("%s\t:\t%s", input, err.toString()));
+    private <T> void printFormattedOutput(String input, T output) {
+        this.output.accept(String.format("%s\t:\t%s", input, output.toString()));
     }
 }

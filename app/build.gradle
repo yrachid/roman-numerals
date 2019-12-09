@@ -35,3 +35,5 @@ task functionalTest(type: Test) {
 task convertAllRomanNumbersTest(type: Test) {
     include "**/functional/AllRomanInputsTest**"
 }
+
+build.mustRunAfter clean

@@ -22,5 +22,8 @@ jobs:
     - name: Test all roman conversions
       run: ./gradlew convertAllRomanNumbersTest --info
 
-    - name: Execute generated jar
-      run: ./scripts/build-and-run.sh
+    - name: Roman -> Arabic
+      run: ./gradlew romanToArabic
+
+    - name: Test with diverse inputs
+      run: ./gradlew miscConversions

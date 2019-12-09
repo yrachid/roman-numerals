@@ -1,0 +1,45 @@
+plugins {
+    id 'base'
+}
+
+def runJar(Exec task, String input) {
+    task.commandLine(
+            "$projectDir/src/main/bash/run.sh",
+            "bash",
+            "${project(':app').buildDir}/libs/numeral-converter.jar",
+            input
+    )
+}
+
+def runDocker(Exec task, String input) {
+    task.commandLine(
+            "$projectDir/src/main/bash/run.sh",
+            "docker",
+            "$rootDir",
+            input
+    )
+}
+
+task arabicToRoman(type: Exec, dependsOn: ':app:build') {
+    runJar delegate, "arabic-to-roman"
+}
+
+task arabicToRomanDocker(type: Exec) {
+    runDocker delegate, "arabic-to-roman"
+}
+
+task romanToArabic(type: Exec, dependsOn: ':app:build') {
+    runJar delegate, "roman-to-arabic"
+}
+
+task romanToArabicDocker(type: Exec) {
+    runDocker delegate, "roman-to-arabic"
+}
+
+task miscConversions(type: Exec, dependsOn: ':app:build') {
+    runJar delegate, "misc"
+}
+
+task miscConversionsDocker(type: Exec) {
+    runDocker delegate, "misc"
+}
