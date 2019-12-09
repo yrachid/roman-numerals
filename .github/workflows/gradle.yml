@@ -25,5 +25,8 @@ jobs:
     - name: Roman -> Arabic
       run: ./gradlew romanToArabic
 
+    - name: Arabic -> Roman
+      run: ./gradlew arabicToRoman
+
     - name: Test with diverse inputs
       run: ./gradlew miscConversions

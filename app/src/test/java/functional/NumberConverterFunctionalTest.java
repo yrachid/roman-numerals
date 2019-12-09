@@ -26,7 +26,7 @@ public class NumberConverterFunctionalTest {
         assertThat(output.get(3), equalTo("1\t:\tI"));
         assertThat(output.get(4), equalTo("10\t:\tX"));
         assertThat(output.get(5), equalTo("49\t:\tXLIX"));
-        assertThat(output.get(6), equalTo("lizard\t:\tInvalid input: Input must be an integer number. It must also not be greater than 3000"));
+        assertThat(output.get(6), equalTo("lizard\t:\tInvalid input: Input must be an integer number within [0001, 3000] or a roman number"));
         assertThat(output.get(7), equalTo("0\t:\tInvalid input: Arabic numerals smaller than 1 are not supported"));
         assertThat(output.get(8), equalTo("3001\t:\tInvalid input: Arabic numerals greater than 3000 are not supported"));
     }
