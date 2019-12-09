@@ -5,6 +5,7 @@
 Enunciado do problema http://codingdojo.org/kata/RomanNumerals/
 
 ### Tecnologias
+
  - Gradle 5.2.1
  - Java 8
  - JUnit 4.12
@@ -14,79 +15,61 @@ Enunciado do problema http://codingdojo.org/kata/RomanNumerals/
 __Testes unitários:__
 
 ```bash
-./gradlew test functionalTest
+./gradlew test
 ```
 
 __Testes funcionais:__
 
 ```bash
-./gradlew functionalTest
+./gradlew functionalTest convertAllRomanNumbersTest
+```
+
+__Testes "semi-automatizados":__
+
+Os testes "semi-automatizados" executarão a aplicação passando alguns parâmetros que cobrem múltiplos cenários. Eles não irão, entretanto,
+verificar o resultado das conversões. Os testes podem ser executados com ou sem __Docker__:
+
+```bash
+
+# Converte todos os valores romanos (do 1 ao 3000) para arabico
+./gradlew romanToArabic
+./gradlew romanToArabicDocker
+
+# Converte todos os valores arabicos (do 1 ao 3000) para romano
+./gradlew arabicToRoman
+./gradlew arabicToRomanDocker
+
+# Executa diversas conversoes e passa algumas entradas invalidas
+./gradlew miscConversions
+./gradlew miscConversionsDocker
 ```
 
 __Teste de conversão romano -> arábico:__
 
-Este teste converte todos os valores romanos (do 1 ao 3000), identificando erros de conversão.
+Este teste executa conversões de todos os números romanos de 1 a 3000. Ele falhará se encontrar alguma conversão que estiver incorreta. Ele
+foi muito útil durante o desenvolvimento, quando o algoritmo estava convertendo 360 números incorretamente:
 
 ```bash
 ./gradlew convertAllRomanNumbersTest
 ```
 
-__Teste de conversão arábico -> romano:__
+### Integração Contínua
 
-Este teste é "semi-automatizado", dado que ele não verifica se os resultados das operações estão corretos:
-
-```bash
-./scripts/arabic-to-roman.sh
-
-./scripts/docker-arabic-to-roman.sh
-```
-
+Os testes acima estão executando a cada push através do Github Actions. Um dos resultados [pode ser conferido aqui](https://github.com/yrachid/roman-numerals/commit/86c18b28167306585260d87e2edd1961ebc1790a/checks?check_suite_id=349293362#step:7:23)
 
 ### Executando a aplicação
-
-Dentro da pasta `scripts` existem dois scripts que automatizam a construção e execução da aplicação de duas maneiras: Como Docker ou sem.
-Ambos recebem um número variável de parâmetros que serão os valores a serem convertidos pela aplicação.
-
-Caso nenhum parâmetro seja passado aos scripts, eles utilizarão os valores pré-definidos no arquivo `scripts/test-values`.
 
 #### Docker
 
 ```bash
-
-# Utilizando valores pre-definidos
-./scripts/docker-build-and-run.sh
-
-# Utilizando valores especificados
-./scripts/docker-build-and-run.sh 1 10 20 1999 2000 X MCM XXVIII
-```
-
-Para executar com Docker sem o script:
-
-```bash
-docker build -t number-converter .
-
-docker run number-converter app.jar 1 10 20 1999 2000 X MCM XXVIII
+docker build -t number-converter . && docker run number-converter app.jar 1 10 20 1999 2000 X MCM XXVIII lizard 0
 ```
 
 #### Jar
 
-De maneira similar à execução com Docker, basta utilizar o script:
-
-```bash
-# Utilizando valores pre-definidos
-./scripts/build-and-run.sh
-
-# Utilizando valores especificados
-./scripts/build-and-run.sh 1 10 20 1999 2000 X MCM XXVIII
-```
-
-Para executar sem o script:
-
 ```bash
 
-./gradlew clean build
-
-java -jar app/build/libs/*.jar 1 10 20 1999 2000 X MCM XXVIII
+./gradlew clean build && java -jar app/build/libs/*.jar 1 10 20 1999 2000 X MCM XXVIII lizard 0
 ```
 
 ## Decisões de implementação
