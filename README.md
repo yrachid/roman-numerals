@@ -11,9 +11,27 @@ Enunciado do problema http://codingdojo.org/kata/RomanNumerals/
 
 ### Executando testes
 
+Testes unitários:
+
 ```bash
 ./gradlew test functionalTest
 ```
+
+Testes funcionais:
+
+```bash
+./gradlew functionalTest
+```
+
+Teste de conversão romano -> arábico:
+
+Este teste converte todos os valores romanos (do 1 ao 3000), identificando
+erros de conversão. 
+
+```bash
+./gradlew convertAllRomanNumbersTest
+```
+
 
 ### Executando a aplicação
 

@@ -32,6 +32,6 @@ task functionalTest(type: Test) {
     include "**/functional/**"
 }
 
-task allRomanNumbersTest(type: Test) {
+task convertAllRomanNumbersTest(type: Test) {
     include "**/functional/AllRomanInputsTest**"
 }

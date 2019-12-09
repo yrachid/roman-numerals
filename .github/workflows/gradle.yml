@@ -20,7 +20,7 @@ jobs:
       run: ./gradlew functionalTest
 
     - name: Test all roman conversions
-      run: ./gradlew allRomanNumbersTest --info
+      run: ./gradlew convertAllRomanNumbersTest --info
 
     - name: Execute generated jar
       run: ./scripts/build-and-run.sh
