@@ -19,5 +19,8 @@ jobs:
     - name: Functional tests
       run: ./gradlew functionalTest
 
+    - name: Test all roman conversions
+      run: ./gradlew allRomanNumbersTest --info
+
     - name: Execute generated jar
       run: ./scripts/build-and-run.sh

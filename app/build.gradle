@@ -31,3 +31,7 @@ test {
 task functionalTest(type: Test) {
     include "**/functional/**"
 }
+
+task allRomansTest(type: Test) {
+    include "**/functional/AllRomanInputsTest**"
+}

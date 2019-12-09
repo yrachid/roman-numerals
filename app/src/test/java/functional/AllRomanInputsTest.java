@@ -47,7 +47,7 @@ public class AllRomanInputsTest {
 
                 if (!currentNumber.equals(result)) {
                     differencesFound++;
-                    System.out.println("expected:\t" + currentNumber + "\tgot:\t" + result + "\tfrom:\t" + currentRoman);
+                    System.out.println("expected:\t" + currentNumber + "\tgot:\t" + result + "\tfrom:\t" + currentRoman + "\tsize:\t" + currentRoman.toString().length());
                 }
             } catch (IllegalArgumentException ex) {
                 differencesFound++;
@@ -57,8 +57,6 @@ public class AllRomanInputsTest {
 
         if (differencesFound > 0) {
             fail("Found a total of " + differencesFound + " incorrect conversions");
-        } else {
-            System.out.println("No differences found.");
         }
     }
 
